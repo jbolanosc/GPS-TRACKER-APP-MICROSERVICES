@@ -1,0 +1,128 @@
+<div
+  class="w-full bg-white min-h-full flex flex-col p-4 items-center justify-center"
+>
+  <p-table [value]="gps" class="border-collapse w-full">
+    <ng-template pTemplate="caption">
+      <h2 class="text-center p-2 font-bold">GPS</h2>
+      <div class="text-center">
+        <button
+          class="bg-green-600 hover:bg-green-700 p-2 rounded-lg"
+          routerLink="/gps/create"
+        >
+          Add Gps
+        </button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          ID
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          NAME
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          LATITUDE
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          LONGITUDE
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          OWNER
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          STATUS
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-gps>
+      <tr
+        class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
+      >
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >ID</span
+          >
+          {{ gps.id }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >name</span
+          >
+          {{ gps.name }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >latitude</span
+          >
+          {{ gps.latitude }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >longitude</span
+          >
+          {{ gps.longitude }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >owner</span
+          >
+          {{ gps.owner }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >Status</span
+          >
+          <span [class]="'product-badge status-' + gps.status.toLowerCase()">{{
+            gps.status
+          }}</span>
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <button
+            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            routerLink="/gps/{{ gps.id }}"
+          >
+            Watch
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between text-center p-2 font-bold">
+        In total there are {{ gps ? gps.length : 0 }} gps.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

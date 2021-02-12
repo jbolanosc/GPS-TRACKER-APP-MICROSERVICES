@@ -1,0 +1,112 @@
+<div
+  class="w-full bg-white min-h-full flex flex-col p-4 items-center justify-center"
+>
+  <p-table [value]="reports" class="border-collapse w-full">
+    <ng-template pTemplate="caption">
+      <h2 class="text-center p-2 font-bold">Reports</h2>
+      <div class="text-center">
+        <button
+          class="bg-green-600 hover:bg-green-700 p-2 rounded-lg"
+          routerLink="/admin/report/add"
+        >
+          Add Report
+        </button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          ID
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+Type
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          Description
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          gps
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          OWNER
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-report>
+      <tr
+        class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
+      >
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >ID</span
+          >
+          {{ report.id }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >name</span
+          >
+          {{ report.type }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >latitude</span
+          >
+          {{ report.description }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >longitude</span
+          >
+          {{ report.gps }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >owner</span
+          >
+          {{ report.owner }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <button
+            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            routerLink="/admin/report/{{ report.id }}"
+          >
+            Watch
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between text-center p-2 font-bold">
+        In total there are {{ reports ? reports.length : 0 }} reports.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

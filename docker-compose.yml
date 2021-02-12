@@ -1,0 +1,114 @@
+version: "3"
+services:
+  gps-db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd2020"
+      MSSQL_PID: "Express"
+    ports:
+      - "7001:1433"
+    networks:
+      gps-network:
+
+  gps-api:
+    build: "./gpsAPI"
+    restart: "always"
+    environment:
+      DBUser: "SA"
+      DBServer: "gps-db"
+      DBPort: 1433
+      Database: "Gps"
+    ports:
+      - "7101:80"
+    depends_on:
+      - gps-db
+    networks:
+      gps-network:
+
+  user-db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd2020"
+      MSSQL_PID: "Express"
+    ports:
+      - "7002:1433"
+    networks:
+      user-network:
+
+  user-api:
+    build: "./user-api"
+    restart: "always"
+    environment:
+      DBUser: "SA"
+      DBServer: "user-db"
+      DBPort: 1433
+      Database: "UserDB"
+    ports:
+      - "7102:80"
+    depends_on:
+      - user-db
+    networks:
+      user-network:
+
+  report-db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd2020"
+      MSSQL_PID: "Express"
+    ports:
+      - "7003:1433"
+    networks:
+      report-network:
+
+  report-api:
+    build: "./report-api"
+    restart: "always"
+    environment:
+      DBUser: "SA"
+      DBServer: "report-db"
+      DBPort: 1433
+      Database: "Report"
+    ports:
+      - "7103:80"
+    depends_on:
+      - report-db
+    networks:
+      report-network:
+
+  api-gateway:
+    build: "./api-gateway"
+    restart: "always"
+    environment:
+      JWT_SECRET: "sadkfiek"
+      PORT: 3000
+      GPS_PROXY: http://gps-api:80
+      USER_PROXY: http://user-api:80
+      REPORT_PROXY: http://report-api:80
+    ports:
+      - "7100:3000"
+    depends_on:
+      - report-api
+      - gps-api
+      - user-api
+    networks:
+      report-network:
+      user-network:
+      gps-network:
+      public-network:
+
+  tracker-app:
+    build: "./tracker-app"
+    restart: "always"
+    ports:
+      - "7104:80"
+    networks:
+      public-network:
+
+networks:
+  gps-network:
+  user-network:
+  report-network:
+  public-network:
