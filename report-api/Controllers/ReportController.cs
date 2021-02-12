@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using report_api.Models;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace report_api.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase
@@ -42,7 +44,6 @@ namespace report_api.Controllers
         [HttpPost]
         public ActionResult<Report> PostReportItem(Report report)
         {
-            System.Console.WriteLine(report);
             if (ModelState.IsValid)
             {
                 _context.ReportItems.Add(report);

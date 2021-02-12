@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Gps } from './../../models/Gps';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -30,27 +31,15 @@ export class GpsService {
       });
   }
 
-  createGps(gps: Gps) {
-    const headers = { ContentType: 'Application/json' };
-    return this.http
-      .post(`${environment.GPS_API}`, JSON.parse(gps.toString()), { headers })
-      .toPromise()
-      .then((res: any) => <Gps>res.data)
-      .then((data) => {
-        return data;
-      });
+  createGps(gps: Gps): Observable<any> {
+    console.log(gps);
+    console.log(JSON.stringify(gps));
+    return this.http.post<any>(`${environment.GPS_API}`, gps);
   }
 
-  updateGps(gps: Gps, id: number) {
-    const headers = { ContentType: 'Application/json' };
-    return this.http
-      .put(`${environment.GPS_API}/${id}`, JSON.parse(gps.toString()), {
-        headers,
-      })
-      .toPromise()
-      .then((res: any) => <Gps>res.data)
-      .then((data) => {
-        console.log(data);
-      });
+  updateGps(gps: Gps, id: number): Observable<any> {
+    console.log(gps);
+    console.log(JSON.stringify(gps));
+    return this.http.put<any>(`${environment.GPS_API}/${id}`, gps);
   }
 }

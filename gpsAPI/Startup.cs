@@ -59,9 +59,9 @@ namespace gpsAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors("CorsPolicy");
+
+            app.UseAuthorization();
 
             waitForDb(app);
 

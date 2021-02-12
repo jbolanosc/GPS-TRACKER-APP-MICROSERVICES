@@ -101,23 +101,20 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     const result = await fetch(`${userProxy}/api/user/login`, {
       method: "POST",
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
     })
-      .then(checkStatus)
-      .then((res) => res.json());
+      .then((res) => res.json())
+      .then((json) => json);
 
     const token = getToken(result);
-    console.log(result);
 
     return res
       .json(successResponse(Constants.LOGIN_SUCCESS, token))
       .status(200);
   } catch (e: any) {
-    console.log(e);
     return res.json(errorResponse(Constants.LOGIN_FAILED + e)).status(500);
   }
 };

@@ -5,8 +5,6 @@ import * as Constants from "./Constants";
 
 const gpsProxy: string = process.env.GPS_PROXY || "http://localhost:7101";
 
-console.log(gpsProxy);
-
 export const getAllGps = async (req: Request, res: Response) => {
   try {
     const allGps = await fetch(`${gpsProxy}/api/gps`)
@@ -43,14 +41,13 @@ export const createGps = async (req: Request, res: Response) => {
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
     })
-      .then(checkStatus)
-      .then((res) => res.json());
+      .then((res) => res.json())
+      .then((json) => json);
 
     return res
       .json(successResponse(Constants.SUCCESS_POST, result))
       .status(200);
   } catch (e: any) {
-    console.log(e);
     return res
       .json(errorResponse(Constants.FAILED_POST + e.toString()))
       .status(500);
@@ -60,15 +57,13 @@ export const createGps = async (req: Request, res: Response) => {
 export const updateGps = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      console.log(req.body);
-      console.log("EDIT");
       const result = await fetch(`${gpsProxy}/api/gps/${req.params.id}`, {
         method: "PUT",
         body: JSON.stringify(req.body),
         headers: { "Content-Type": "application/json" },
       })
-        .then(checkStatus)
-        .then((res) => res.json());
+        .then((res) => res.json())
+        .then((json) => json);
 
       return res
         .json(successResponse(Constants.SUCCESS_UPDATE, result))
@@ -76,7 +71,6 @@ export const updateGps = async (req: Request, res: Response) => {
     }
     return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
   } catch (e) {
-    console.log(e);
     return res
       .json(errorResponse(Constants.FAILED_UPDATE + e.toString()))
       .status(500);

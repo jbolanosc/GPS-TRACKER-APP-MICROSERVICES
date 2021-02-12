@@ -39,8 +39,6 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const createReport = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    console.log("create");
     const result = await fetch(`${reportProxy}/api/report`, {
       method: "POST",
       body: JSON.stringify(req.body),
@@ -51,7 +49,6 @@ export const createReport = async (req: Request, res: Response) => {
 
     return res.json(successResponse(Constants.SUCESS_GET, result)).status(200);
   } catch (e: any) {
-    console.log(e);
     return res
       .json(errorResponse(Constants.FAILED_POST + e.toString()))
       .status(500);
@@ -60,8 +57,6 @@ export const createReport = async (req: Request, res: Response) => {
 
 export const updateReport = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    console.log("EDIT");
     if (req.params.id) {
       const result = await fetch(`${reportProxy}/api/report/${req.params.id}`, {
         method: "PUT",
@@ -77,7 +72,6 @@ export const updateReport = async (req: Request, res: Response) => {
     }
     return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
   } catch (e) {
-    console.log(e);
     return res
       .json(errorResponse(Constants.FAILED_UPDATE + e.toString()))
       .status(500);

@@ -1,35 +1,21 @@
+import { User } from './../../models/User';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<boolean> {
-    const headers = { ContentType: 'Application/json' };
-    return this.http
-      .post<{ token: string }>(
-        `${environment.USER_API}/login`,
-        {
-          username: username,
-          password: password,
-        },
-        { headers }
-      )
-      .pipe(
-        map((result) => {
-          localStorage.setItem('access_token', result.token);
-          console.log(result);
-          return true;
-        })
-      );
+  login(user: User): Observable<boolean> {
+    return this.http.post<any>(`${environment.USER_API}/login`, user);
   }
 
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.clear();
+    window.localStorage.clear();
   }
 
   public get loggedIn(): boolean {

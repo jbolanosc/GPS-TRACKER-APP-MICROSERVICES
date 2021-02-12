@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using gpsAPI.Models;
 
@@ -42,28 +43,35 @@ namespace gpsAPI.Controllers
         [HttpPost]
         public ActionResult<Gps> PostGpsItem(Gps gps)
         {
-            System.Console.WriteLine(gps);
+            if (ModelState.IsValid)
+            {
+                System.Console.WriteLine(gps);
 
-            _context.GpsItems.Add(gps);
-            _context.SaveChanges();
+                _context.GpsItems.Add(gps);
+                _context.SaveChanges();
 
-            return CreatedAtAction("GetGpsItem", new Gps { id = gps.id }, gps);
+                return CreatedAtAction("GetGpsItem", new Gps { id = gps.id }, gps);
+            }
+            return BadRequest("INVALID BODY");
 
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutGpsItem(long id, Gps gps)
+        public ActionResult<Gps> PutGpsItem(long id, Gps gps)
         {
-
-            if (id != gps.id)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                if (id != gps.id)
+                {
+                    return BadRequest();
+                }
+
+                _context.Entry(gps).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return Ok("Updated...");
             }
-
-            _context.Entry(gps).State = EntityState.Modified;
-            _context.SaveChanges();
-
-            return Ok("Updated...");
+            return BadRequest("INVALID BODY");
         }
 
         [HttpDelete("{id}")]

@@ -11,6 +11,7 @@ using BC = BCrypt.Net.BCrypt;
 
 namespace user_api.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -100,7 +101,7 @@ namespace user_api.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<string> Login(User user)
+        public ActionResult<User> Login(User user)
         {
             if (user.email != null && user.password != null)
             {
@@ -109,7 +110,7 @@ namespace user_api.Controllers
                 {
                     if (BC.Verify(user.password, userExists.password))
                     {
-                        return userExists.ToString();
+                        return userExists;
                     }
                     return BadRequest("Incorrect email or password");
                 }

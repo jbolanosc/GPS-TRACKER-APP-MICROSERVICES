@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -29,29 +30,15 @@ export class ReportService {
       });
   }
 
-  createReport(report: Report) {
-    const headers = { ContentType: 'Application/json' };
-    return this.http
-      .post(`${environment.REPORT_API}`, JSON.parse(report.toString()), {
-        headers,
-      })
-      .toPromise()
-      .then((res: any) => <Report>res.data)
-      .then((data) => {
-        return data;
-      });
+  createReport(report: Report): Observable<any> {
+    console.log(report);
+    console.log(JSON.stringify(report));
+    return this.http.post<any>(`${environment.REPORT_API}`, report);
   }
 
-  updateReport(id: number, report: Report) {
-    const headers = { ContentType: 'Application/json' };
-    return this.http
-      .put(`${environment.REPORT_API}/${id}`, JSON.parse(report.toString()), {
-        headers,
-      })
-      .toPromise()
-      .then((res: any) => <Report>res.data)
-      .then((data) => {
-        console.log(data);
-      });
+  updateReport(report: Report, id: number): Observable<any> {
+    console.log(report);
+    console.log(JSON.stringify(report));
+    return this.http.put<any>(`${environment.REPORT_API}/${id}`, report);
   }
 }
