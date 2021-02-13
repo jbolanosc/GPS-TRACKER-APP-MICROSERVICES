@@ -17,6 +17,7 @@ THIS APP IS DEVELOPED USING .NET CORE 5.0, NODEJS TYPESCRIPT, ANGULAR, SQL SERVE
 **API-GATEWAY**: http://localhost:7100
 
 **Gps**
+
 1- GET /gps to get all gps
 2- GET /gps/:id get one gps
 3- POST /gps create gps
@@ -24,6 +25,7 @@ THIS APP IS DEVELOPED USING .NET CORE 5.0, NODEJS TYPESCRIPT, ANGULAR, SQL SERVE
 5- DELETE /gps/:id delete gps
 
 **Reports**
+
 1- GET /reports to get all gps
 2- GET /reports/:id get one gps
 3- POST /reports create gps
@@ -31,6 +33,7 @@ THIS APP IS DEVELOPED USING .NET CORE 5.0, NODEJS TYPESCRIPT, ANGULAR, SQL SERVE
 5- DELETE /reports/:id delete gps
 
 **User**
+
 1- GET /user to get all gps
 2- GET /user/:id get one gps
 3- POST /user create gps
