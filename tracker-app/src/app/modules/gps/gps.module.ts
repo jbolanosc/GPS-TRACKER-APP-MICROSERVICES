@@ -7,9 +7,10 @@ import { GpsRoutingModule } from './gps-routing.module';
 import { GpsFormComponent } from './gps-form/gps-form.component';
 import { GpsTableComponent } from './gps-table/gps-table.component';
 import { GpsService } from '../../services/gps-service/gps-service.service';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
-  declarations: [GpsFormComponent, GpsTableComponent],
+  declarations: [GpsFormComponent, GpsTableComponent, MapComponent],
   imports: [
     CommonModule,
     GpsRoutingModule,

@@ -1,6 +1,8 @@
-<div class="w-full bg-white h-full flex flex-col items-center justify-center">
+<div
+  class="w-full bg-white min-h-full flex flex-col items-center justify-center"
+>
   <h1 class="text-gradient">GPS MANAGER</h1>
-  <form #createForm="ngForm">
+  <form #createForm="ngForm" class="w-2/4">
     <div>
       <label class="block mb-2 text-primary">Name</label>
       <input
@@ -102,5 +104,6 @@
         (click)="saveGps()"
       />
     </div>
+    <leaflet-map></leaflet-map>
   </form>
 </div>
