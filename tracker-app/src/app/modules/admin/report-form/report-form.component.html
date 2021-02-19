@@ -1,84 +1,87 @@
 <div class="w-full bg-white h-full flex flex-col items-center justify-center">
-    <h1 class="text-gradient">REPORT MANAGER</h1>
-    <form #createForm="ngForm">
-      <div>
-        <label class="block mb-2 text-primary">type</label>
-        <input
-          id="type"
-          name="type"
-          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-          required
-          [(ngModel)]="report.type"
-          #type="ngModel"
-        />
-        <div
-          *ngIf="type.invalid && (type.dirty || type.touched)"
-          class="text-red"
-        >
-          Invalid type
-        </div>
+  <h1 class="text-gradient text-4xl p-2 text-center font-bold">
+    REPORT MANAGER
+  </h1>
+  <form #createForm="ngForm">
+    <div>
+      <label class="block mb-2 text-primary">Type</label>
+      <select
+        name="type"
+        id="type"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        [(ngModel)]="report.type"
+        #type="ngModel"
+      >
+        <option *ngFor="let type of types" [value]="type.label">
+          {{ type.label }}
+        </option>
+      </select>
+      <div
+        *ngIf="type.invalid && (type.dirty || type.touched)"
+        class="text-red"
+      >
+        Invalid type
       </div>
-      <div>
-        <label class="block mb-2 text-primary">Description</label>
-        <input
-          id="description"
-          name="description"
-          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-          required
-          [(ngModel)]="report.description"
-          #description="ngModel"
-        />
-        <div
-          *ngIf="description.invalid && (description.dirty || description.touched)"
-          class="text-red"
-        >
-          Invalid description
-        </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Description</label>
+      <input
+        id="description"
+        name="description"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        [(ngModel)]="report.description"
+        #description="ngModel"
+      />
+      <div
+        *ngIf="
+          description.invalid && (description.dirty || description.touched)
+        "
+        class="text-red"
+      >
+        Invalid description
       </div>
-      <div>
-        <label class="block mb-2 text-primary">GPS</label>
-        <input
-          id="gps"
-          name="gps"
-          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-          required
-          type="number"
-          [(ngModel)]="report.gps"
-          #gps="ngModel"
-        />
-        <div
-          *ngIf="gps.invalid && (gps.dirty || gps.touched)"
-          class="text-red"
-        >
-          Invalid gps
-        </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">GPS</label>
+      <input
+        id="gps"
+        name="gps"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        type="number"
+        [(ngModel)]="report.gps"
+        #gps="ngModel"
+      />
+      <div *ngIf="gps.invalid && (gps.dirty || gps.touched)" class="text-red">
+        Invalid gps
       </div>
-      <div>
-        <label class="block mb-2 text-primary">Owner</label>
-        <input
-          id="owner"
-          name="owner"
-          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-          required
-          type="number"
-          [(ngModel)]="report.owner"
-          #owner="ngModel"
-        />
-        <div
-          *ngIf="owner.invalid && (owner.dirty || owner.touched)"
-          class="text-red"
-        >
-          Invalid Owner
-        </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Owner</label>
+      <input
+        id="owner"
+        name="owner"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        type="number"
+        [(ngModel)]="report.owner"
+        #owner="ngModel"
+      />
+      <div
+        *ngIf="owner.invalid && (owner.dirty || owner.touched)"
+        class="text-red"
+      >
+        Invalid Owner
       </div>
-      <div>
-        <input
-          class="cursor-pointer w-full btn-grad text-white font-bold py-2 px-4 mb-6 rounded"
-          type="submit"
-          [disabled]="!createForm.form.valid"
-          (click)="saveReport()"
-        />
-      </div>
-    </form>
-  </div>
-  
+    </div>
+    <div>
+      <input
+        class="cursor-pointer w-full btn-grad text-white font-bold py-2 px-4 mb-6 rounded"
+        type="submit"
+        [disabled]="!createForm.form.valid"
+        (click)="saveReport()"
+      />
+    </div>
+  </form>
+</div>

@@ -10,14 +10,14 @@ export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const allUsers = await fetch(`${userProxy}/api/user`)
       .then(checkStatus)
-      .then((res) => res.json());
+      .then((res: any) => res.json());
     return res
       .json(successResponse(Constants.SUCESS_GET, allUsers))
       .status(200);
   } catch (e: any) {
     return res
-      .json(successResponse(Constants.FAILED_GET, e.toString()))
-      .status(500);
+      .status(500)
+      .send(successResponse(Constants.FAILED_GET, e.toString()));
   }
 };
 
@@ -26,13 +26,13 @@ export const getUser = async (req: Request, res: Response) => {
     if (req.params.id) {
       const user = await fetch(`${userProxy}/api/user/${req.params.id}`)
         .then(checkStatus)
-        .then((res) => res.json());
+        .then((res: any) => res.json());
 
       return res.json(successResponse(Constants.SUCESS_GET, user)).status(200);
     }
-    return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
+    return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e: any) {
-    return res.json(errorResponse(Constants.FAILED_GET)).status(500);
+    return res.status(500).send(errorResponse(Constants.FAILED_GET));
   }
 };
 
@@ -44,13 +44,13 @@ export const createUser = async (req: Request, res: Response) => {
       headers: { "Content-Type": "application/json" },
     })
       .then(checkStatus)
-      .then((res) => res.json());
+      .then((res: any) => res.json());
 
     return res.json(successResponse(Constants.SUCESS_GET, result)).status(200);
   } catch (e: any) {
     return res
-      .json(errorResponse(Constants.FAILED_POST + e.toString()))
-      .status(500);
+      .status(500)
+      .json(errorResponse(Constants.FAILED_POST + e.toString()));
   }
 };
 
@@ -63,7 +63,7 @@ export const updateUser = async (req: Request, res: Response) => {
         headers: { "Content-Type": "application/json" },
       })
         .then(checkStatus)
-        .then((res) => res.json());
+        .then((res: any) => res.json());
 
       return res
         .json(successResponse(Constants.SUCCESS_UPDATE, result))
@@ -72,8 +72,8 @@ export const updateUser = async (req: Request, res: Response) => {
     return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
   } catch (e) {
     return res
-      .json(errorResponse(Constants.FAILED_UPDATE + e.toString()))
-      .status(500);
+      .status(500)
+      .send(errorResponse(Constants.FAILED_UPDATE + e.toString()));
   }
 };
 
@@ -84,7 +84,7 @@ export const deleteUser = async (req: Request, res: Response) => {
         method: "DELETE",
       })
         .then(checkStatus)
-        .then((res) => res.json());
+        .then((res: any) => res.json());
 
       return res
         .json(successResponse(Constants.SUCCESS_UPDATE, result))
@@ -94,8 +94,8 @@ export const deleteUser = async (req: Request, res: Response) => {
     return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
   } catch (e) {
     return res
-      .json(errorResponse(Constants.FAILED_UPDATE + e.toString()))
-      .status(500);
+      .status(500)
+      .send(errorResponse(Constants.FAILED_UPDATE + e.toString()));
   }
 };
 
@@ -107,7 +107,7 @@ export const loginUser = async (req: Request, res: Response) => {
       headers: { "Content-Type": "application/json" },
     })
       .then(checkStatus)
-      .then((res) => res.json());
+      .then((res: any) => res.json());
 
     const token = getToken(result);
 

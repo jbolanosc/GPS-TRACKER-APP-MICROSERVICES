@@ -10,24 +10,12 @@ import { Report } from '../../models/Report';
 export class ReportService {
   constructor(private http: HttpClient) {}
 
-  getReports() {
-    return this.http
-      .get(`${environment.REPORT_API}`)
-      .toPromise()
-      .then((res: any) => <Report[]>res.data)
-      .then((data) => {
-        return data;
-      });
+  getReports(): Observable<any> {
+    return this.http.get(`${environment.REPORT_API}`);
   }
 
-  getReport(id: number) {
-    return this.http
-      .get(`${environment.REPORT_API}/${id}`)
-      .toPromise()
-      .then((res: any) => <Report>res.data)
-      .then((data) => {
-        return data;
-      });
+  getReport(id: number): Observable<any> {
+    return this.http.get(`${environment.REPORT_API}/${id}`);
   }
 
   createReport(report: Report): Observable<any> {

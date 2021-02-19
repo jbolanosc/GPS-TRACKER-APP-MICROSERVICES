@@ -9,13 +9,13 @@ export const getAllGps = async (req: Request, res: Response) => {
   try {
     const allGps = await fetch(`${gpsProxy}/api/gps`)
       .then(checkStatus)
-      .then((res) => res.json());
+      .then((res: any) => res.json());
 
     return res.json(successResponse(Constants.SUCESS_GET, allGps)).status(200);
   } catch (e: any) {
     return res
-      .json(successResponse(Constants.FAILED_GET, e.toString()))
-      .status(500);
+      .status(500)
+      .send(successResponse(Constants.FAILED_GET, e.toString()));
   }
 };
 
@@ -24,13 +24,13 @@ export const getGps = async (req: Request, res: Response) => {
     if (req.params.id) {
       const gps = await fetch(`${gpsProxy}/api/gps/${req.params.id}`)
         .then(checkStatus)
-        .then((res) => res.json());
+        .then((res: any) => res.json());
 
       return res.json(successResponse(Constants.SUCESS_GET, gps)).status(200);
     }
-    return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
+    return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e: any) {
-    return res.json(errorResponse(Constants.FAILED_GET)).status(500);
+    return res.status(500).send(errorResponse(Constants.FAILED_GET));
   }
 };
 
@@ -41,16 +41,16 @@ export const createGps = async (req: Request, res: Response) => {
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((json) => json);
+      .then(checkStatus)
+      .then((res: any) => res.json());
 
     return res
       .json(successResponse(Constants.SUCCESS_POST, result))
       .status(200);
   } catch (e: any) {
     return res
-      .json(errorResponse(Constants.FAILED_POST + e.toString()))
-      .status(500);
+      .status(500)
+      .send(errorResponse(Constants.FAILED_POST + e.toString()));
   }
 };
 
@@ -62,18 +62,18 @@ export const updateGps = async (req: Request, res: Response) => {
         body: JSON.stringify(req.body),
         headers: { "Content-Type": "application/json" },
       })
-        .then((res) => res.json())
-        .then((json) => json);
+        .then(checkStatus)
+        .then((res: any) => res.json());
 
       return res
         .json(successResponse(Constants.SUCCESS_UPDATE, result))
         .status(200);
     }
-    return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
+    return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e) {
     return res
-      .json(errorResponse(Constants.FAILED_UPDATE + e.toString()))
-      .status(500);
+      .status(500)
+      .send(errorResponse(Constants.FAILED_UPDATE + e.toString()));
   }
 };
 
@@ -84,17 +84,17 @@ export const deleteGps = async (req: Request, res: Response) => {
         method: "DELETE",
       })
         .then(checkStatus)
-        .then((res) => res.json());
+        .then((res: any) => res.json());
 
       return res
         .json(successResponse(Constants.SUCCESS_DELETE, result))
         .status(200);
     }
 
-    return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
+    return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e) {
     return res
-      .json(errorResponse(Constants.FAILED_DELETE + e.toString()))
-      .status(500);
+      .status(500)
+      .send(errorResponse(Constants.FAILED_DELETE + e.toString()));
   }
 };

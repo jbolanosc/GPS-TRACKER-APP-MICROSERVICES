@@ -12,7 +12,7 @@ THIS APP IS DEVELOPED USING .NET CORE 5.0, NODEJS TYPESCRIPT, ANGULAR, SQL SERVE
 
 ## ROUTES
 
-**ANGULAR**: http://localhost:7104
+**ANGULAR**: http://localhost:7105
 
 **API-GATEWAY**: http://localhost:7100
 

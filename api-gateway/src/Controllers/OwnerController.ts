@@ -3,15 +3,16 @@ import fetch from "node-fetch";
 import { successResponse, errorResponse, checkStatus } from "../Services";
 import * as Constants from "./Constants";
 
-const reportProxy: string = process.env.REPORT_PROXY || "http://localhost:7103";
+const ownerProxy: string = process.env.OWNER_PROXY || "http://localhost:7104";
 
-export const getAllReports = async (req: Request, res: Response) => {
+export const getAllOwners = async (req: Request, res: Response) => {
   try {
-    const allReports = await fetch(`${reportProxy}/api/report`)
+    const allOwners = await fetch(`${ownerProxy}/api/owners`)
       .then(checkStatus)
       .then((res: any) => res.json());
+
     return res
-      .json(successResponse(Constants.SUCESS_GET, allReports))
+      .json(successResponse(Constants.SUCESS_GET, allOwners))
       .status(200);
   } catch (e: any) {
     return res
@@ -20,16 +21,14 @@ export const getAllReports = async (req: Request, res: Response) => {
   }
 };
 
-export const getReport = async (req: Request, res: Response) => {
+export const getOwner = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      const report = await fetch(`${reportProxy}/api/report/${req.params.id}`)
+      const owner = await fetch(`${ownerProxy}/api/owner/${req.params.id}`)
         .then(checkStatus)
         .then((res: any) => res.json());
 
-      return res
-        .json(successResponse(Constants.SUCESS_GET, report))
-        .status(200);
+      return res.json(successResponse(Constants.SUCESS_GET, owner)).status(200);
     }
     return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e: any) {
@@ -37,9 +36,9 @@ export const getReport = async (req: Request, res: Response) => {
   }
 };
 
-export const createReport = async (req: Request, res: Response) => {
+export const createOwner = async (req: Request, res: Response) => {
   try {
-    const result = await fetch(`${reportProxy}/api/report`, {
+    const result = await fetch(`${ownerProxy}/api/owner`, {
       method: "POST",
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
@@ -47,7 +46,9 @@ export const createReport = async (req: Request, res: Response) => {
       .then(checkStatus)
       .then((res: any) => res.json());
 
-    return res.json(successResponse(Constants.SUCESS_GET, result)).status(200);
+    return res
+      .json(successResponse(Constants.SUCCESS_POST, result))
+      .status(200);
   } catch (e: any) {
     return res
       .status(500)
@@ -55,10 +56,10 @@ export const createReport = async (req: Request, res: Response) => {
   }
 };
 
-export const updateReport = async (req: Request, res: Response) => {
+export const updateOwner = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      const result = await fetch(`${reportProxy}/api/report/${req.params.id}`, {
+      const result = await fetch(`${ownerProxy}/api/owner/${req.params.id}`, {
         method: "PUT",
         body: JSON.stringify(req.body),
         headers: { "Content-Type": "application/json" },
@@ -71,17 +72,17 @@ export const updateReport = async (req: Request, res: Response) => {
         .status(200);
     }
     return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
-  } catch (e: any) {
+  } catch (e) {
     return res
       .status(500)
       .send(errorResponse(Constants.FAILED_UPDATE + e.toString()));
   }
 };
 
-export const deleteReport = async (req: Request, res: Response) => {
+export const deleteOwner = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      const result = await fetch(`${reportProxy}/api/report/${req.params.id}`, {
+      const result = await fetch(`${ownerProxy}/api/owner/${req.params.id}`, {
         method: "DELETE",
       })
         .then(checkStatus)
@@ -92,10 +93,7 @@ export const deleteReport = async (req: Request, res: Response) => {
         .status(200);
     }
 
-    return res
-      .status(400)
-      .send(errorResponse(Constants.BAD_REQUEST))
-      .status(400);
+    return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e) {
     return res
       .status(500)

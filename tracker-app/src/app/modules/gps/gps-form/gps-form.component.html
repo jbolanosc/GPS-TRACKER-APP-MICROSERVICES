@@ -1,7 +1,7 @@
 <div
   class="w-full min-h-full bg-white flex flex-col items-center justify-center"
 >
-  <h1 class="text-gradient">GPS MANAGER</h1>
+  <h1 class="text-gradient text-4xl p-2 text-center font-bold">GPS MANAGER</h1>
   <form #createForm="ngForm" class="w-2/4">
     <div>
       <label class="block mb-2 text-primary">Name</label>
@@ -79,16 +79,17 @@
     </div>
     <div>
       <label class="block mb-2 text-primary">Status</label>
-      <input
-        id="status"
+      <select
         name="status"
+        id="status"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-        required
-        type="text"
-        minlength="4"
         [(ngModel)]="gps.status"
         #status="ngModel"
-      />
+      >
+        <option *ngFor="let state of statusOptions" [value]="state.label">
+          {{ state.label }}
+        </option>
+      </select>
       <div
         *ngIf="status.invalid && (status.dirty || status.touched)"
         class="text-red"
