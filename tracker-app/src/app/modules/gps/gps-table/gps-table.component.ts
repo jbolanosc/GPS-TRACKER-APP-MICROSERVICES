@@ -9,9 +9,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GpsTableComponent implements OnInit {
   gps: Gps[] = [];
+
+  first: number = 0;
+
+  rows: number = 10;
+
   constructor(private gpsService: GpsService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.loadAllGps();
+  }
+
+  private loadAllGps() {
     this.gpsService.getAllGps().subscribe(
       (res) => {
         console.log('HTTP response', res);
@@ -25,7 +34,7 @@ export class GpsTableComponent implements OnInit {
     );
   }
 
-  deleteGps(id: number): void {
+  private deleteGps(id: number): void {
     this.gpsService.deleteGps(id).subscribe(
       (res) => {
         console.log('HTTP response', res);
@@ -44,5 +53,25 @@ export class GpsTableComponent implements OnInit {
 
   private showError(message: string) {
     this.toastr.error(message, 'Action failed');
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean {
+    return this.gps ? this.first === this.gps.length - this.rows : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.gps ? this.first === 0 : true;
   }
 }

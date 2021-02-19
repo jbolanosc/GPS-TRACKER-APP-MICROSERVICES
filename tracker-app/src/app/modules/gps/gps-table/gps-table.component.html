@@ -1,7 +1,15 @@
 <div
   class="w-full min-h-full bg-white flex flex-col items-center justify-center"
 >
-  <p-table [value]="gps" class="border-collapse w-full">
+  <p-table
+    [value]="gps"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    class="border-collapse w-full"
+  >
     <ng-template pTemplate="caption">
       <h2 class="text-center p-2 font-bold">GPS</h2>
       <div class="text-center">
@@ -129,6 +137,20 @@
       <div class="p-d-flex p-ai-center p-jc-between text-center p-2 font-bold">
         In total there are {{ gps ? gps.length : 0 }} gps.
       </div>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button
+        type="button"
+        icon="pi pi-plus"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button
+        type="button"
+        icon="pi pi-cloud"
+        styleClass="p-button-text"
+      ></p-button>
     </ng-template>
   </p-table>
 </div>
