@@ -11,6 +11,15 @@ export class GpsTableComponent implements OnInit {
   constructor(private gpsService: GpsService) {}
 
   ngOnInit(): void {
-    this.gpsService.getAllGps().then((gps) => (this.gps = gps));
+    this.gpsService.getAllGps().subscribe((result) => {
+      console.log(result.data);
+      this.gps = result.data;
+    });
+  }
+
+  deleteGps(id: number): void {
+    this.gpsService.deleteGps(id).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

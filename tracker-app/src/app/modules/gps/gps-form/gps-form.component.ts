@@ -30,7 +30,10 @@ export class GpsFormComponent implements OnInit {
   loadGps() {
     if (this.param !== 0 && this.param != undefined && !isNaN(this.param)) {
       this.gps.id = this.param;
-      this.gpsService.getGps(this.gps.id).then((gps) => (this.gps = gps));
+      this.gpsService.getGps(this.gps.id).subscribe((result) => {
+        console.log(result.data);
+        this.gps = result.data;
+      });
       this.edit = true;
     }
   }

@@ -106,8 +106,8 @@ export const loginUser = async (req: Request, res: Response) => {
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((json) => json);
+      .then(checkStatus)
+      .then((res) => res.json());
 
     const token = getToken(result);
 
@@ -115,6 +115,6 @@ export const loginUser = async (req: Request, res: Response) => {
       .json(successResponse(Constants.LOGIN_SUCCESS, token))
       .status(200);
   } catch (e: any) {
-    return res.json(errorResponse(Constants.LOGIN_FAILED + e)).status(500);
+    return res.status(500).send(errorResponse(Constants.LOGIN_FAILED + e));
   }
 };

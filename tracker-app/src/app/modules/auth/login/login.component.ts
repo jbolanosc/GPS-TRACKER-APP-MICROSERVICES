@@ -2,6 +2,7 @@ import { User } from './../../../models/User';
 import { AuthService } from './../../../services/auth-service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,14 +17,33 @@ export class LoginComponent implements OnInit {
   };
   error: string = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private toastr: ToastrService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
+
   login() {
-    this.auth.login(this.user).subscribe((data: any) => {
-      console.log(data);
-      localStorage.setItem('access_token', data.data);
-      this.router.navigate(['gps']);
-    });
+    this.auth.login(this.user).subscribe(
+      (res) => {
+        console.log('HTTP response', res);
+        this.showSuccess();
+        this.router.navigate['gps'];
+      },
+      (err) => {
+        console.log('HTTP Error', err);
+        this.showError();
+      }
+    );
+  }
+
+  showSuccess() {
+    this.toastr.success('Welcome', 'Login Success');
+  }
+
+  showError() {
+    this.toastr.error('Invalid user or password', 'Login failed');
   }
 }

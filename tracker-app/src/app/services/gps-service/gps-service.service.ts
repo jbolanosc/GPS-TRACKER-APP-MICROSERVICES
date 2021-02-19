@@ -11,24 +11,12 @@ import { environment } from '../../../environments/environment';
 export class GpsService {
   constructor(private http: HttpClient) {}
 
-  getAllGps() {
-    return this.http
-      .get(environment.GPS_API)
-      .toPromise()
-      .then((res: any) => <Gps[]>res.data)
-      .then((data) => {
-        return data;
-      });
+  getAllGps(): Observable<any> {
+    return this.http.get(environment.GPS_API);
   }
 
-  getGps(id: number) {
-    return this.http
-      .get(`${environment.GPS_API}/${id}`)
-      .toPromise()
-      .then((res: any) => <Gps>res.data)
-      .then((data) => {
-        return data;
-      });
+  getGps(id: number): Observable<any> {
+    return this.http.get(`${environment.GPS_API}/${id}`);
   }
 
   createGps(gps: Gps): Observable<any> {
@@ -41,5 +29,9 @@ export class GpsService {
     console.log(gps);
     console.log(JSON.stringify(gps));
     return this.http.put<any>(`${environment.GPS_API}/${id}`, gps);
+  }
+
+  deleteGps(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.GPS_API}/${id}`);
   }
 }

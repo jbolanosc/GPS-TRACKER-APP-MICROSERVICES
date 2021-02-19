@@ -1,3 +1,4 @@
+import { MapComponent } from './map/map.component';
 import { GpsFormComponent } from './gps-form/gps-form.component';
 import { GpsTableComponent } from './gps-table/gps-table.component';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: ':id',
     component: GpsFormComponent,
+  },
+  {
+    path: 'map/:id',
+    component: MapComponent,
   },
 ];
 

@@ -78,6 +78,32 @@ services:
     networks:
       report-network:
 
+  owner-db:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd2020"
+      MSSQL_PID: "Express"
+    ports:
+      - "7004:1433"
+    networks:
+      owner-network:
+
+  owner-api:
+    build: "./owner-api"
+    restart: "always"
+    environment:
+      DBUser: "SA"
+      DBServer: "owner-db"
+      DBPort: 1433
+      Database: "Owner"
+    ports:
+      - "7104:80"
+    depends_on:
+      - owner-db
+    networks:
+      owner-network:
+
   api-gateway:
     build: "./api-gateway"
     restart: "always"
@@ -98,12 +124,13 @@ services:
       user-network:
       gps-network:
       public-network:
+      owner-network:
 
   tracker-app:
     build: "./tracker-app"
     restart: "always"
     ports:
-      - "7104:80"
+      - "7105:80"
     networks:
       public-network:
 
@@ -112,3 +139,4 @@ networks:
   user-network:
   report-network:
   public-network:
+  owner-network:

@@ -5,8 +5,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { LayoutModule } from './modules/layout/layout.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     LayoutModule,
     UserModule,
     AuthModule,
@@ -34,6 +37,11 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
       },
+    }),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
     }),
   ],
   providers: [AuthGuard],
