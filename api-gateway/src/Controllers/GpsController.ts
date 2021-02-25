@@ -1,3 +1,4 @@
+import { validateOwner } from "./OwnerController";
 import { Request, Response } from "express";
 import fetch from "node-fetch";
 import { successResponse, errorResponse, checkStatus } from "../Services";
@@ -36,6 +37,13 @@ export const getGps = async (req: Request, res: Response) => {
 
 export const createGps = async (req: Request, res: Response) => {
   try {
+    if (req.body.owner !== null) {
+      let result = validateOwner(req.body.owner);
+      console.log(result);
+      if (result) {
+        return res.status(401).send(errorResponse("Invalid Owner"));
+      }
+    }
     const result = await fetch(`${gpsProxy}/api/gps`, {
       method: "POST",
       body: JSON.stringify(req.body),
@@ -57,6 +65,14 @@ export const createGps = async (req: Request, res: Response) => {
 export const updateGps = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
+      if (req.body.owner !== null) {
+        let result = validateOwner(req.body.owner);
+        console.log(result);
+        if (result) {
+          return res.status(401).send(errorResponse("Invalid Owner"));
+        }
+      }
+
       const result = await fetch(`${gpsProxy}/api/gps/${req.params.id}`, {
         method: "PUT",
         body: JSON.stringify(req.body),
@@ -97,4 +113,15 @@ export const deleteGps = async (req: Request, res: Response) => {
       .status(500)
       .send(errorResponse(Constants.FAILED_DELETE + e.toString()));
   }
+};
+
+export const validateGps = async (id: number) => {
+  const gps = await fetch(`${gpsProxy}/api/gps/${id}`)
+    .then(checkStatus)
+    .then((res: any) => res.json());
+  return gps;
+
+  if (gps) return true;
+
+  return false;
 };

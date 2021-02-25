@@ -7,7 +7,7 @@ const ownerProxy: string = process.env.OWNER_PROXY || "http://localhost:7104";
 
 export const getAllOwners = async (req: Request, res: Response) => {
   try {
-    const allOwners = await fetch(`${ownerProxy}/api/owners`)
+    const allOwners = await fetch(`${ownerProxy}/api/owner`)
       .then(checkStatus)
       .then((res: any) => res.json());
 
@@ -15,9 +15,7 @@ export const getAllOwners = async (req: Request, res: Response) => {
       .json(successResponse(Constants.SUCESS_GET, allOwners))
       .status(200);
   } catch (e: any) {
-    return res
-      .status(500)
-      .send(successResponse(Constants.FAILED_GET, e.toString()));
+    return res.status(500).send(errorResponse(e));
   }
 };
 
@@ -99,4 +97,14 @@ export const deleteOwner = async (req: Request, res: Response) => {
       .status(500)
       .send(errorResponse(Constants.FAILED_DELETE + e.toString()));
   }
+};
+
+export const validateOwner = async (id: number) => {
+  const owner = await fetch(`${ownerProxy}/api/owner/${id}`)
+    .then(checkStatus)
+    .then((res: any) => res.json());
+
+  if (owner) return true;
+
+  return false;
 };

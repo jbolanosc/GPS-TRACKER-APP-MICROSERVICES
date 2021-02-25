@@ -7,6 +7,7 @@ export const environment = {
   GPS_API: 'http://localhost:7100/gps',
   USER_API: 'http://localhost:7100/user',
   REPORT_API: 'http://localhost:7100/reports',
+  OWNER_API: 'http://localhost:7100/owners',
 };
 
 /*

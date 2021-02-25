@@ -1,3 +1,5 @@
+import { validateOwner } from "./OwnerController";
+import { validateGps } from "./GpsController";
 import { Request, Response } from "express";
 import fetch from "node-fetch";
 import { successResponse, errorResponse, checkStatus } from "../Services";
@@ -39,15 +41,25 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const createReport = async (req: Request, res: Response) => {
   try {
-    const result = await fetch(`${reportProxy}/api/report`, {
-      method: "POST",
-      body: JSON.stringify(req.body),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(checkStatus)
-      .then((res: any) => res.json());
+    if (req.body.owner !== null && req.body.gps !== null) {
+      if (validateGps(req.body.gps))
+        res.status(400).send(errorResponse("Invalid gps"));
+      if (validateOwner(req.body.owner))
+        res.status(400).send(errorResponse("Invalid owner"));
 
-    return res.json(successResponse(Constants.SUCESS_GET, result)).status(200);
+      const result = await fetch(`${reportProxy}/api/report`, {
+        method: "POST",
+        body: JSON.stringify(req.body),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then(checkStatus)
+        .then((res: any) => res.json());
+
+      return res
+        .json(successResponse(Constants.SUCESS_GET, result))
+        .status(200);
+    }
+    return res.status(400).send(errorResponse("Invalid body"));
   } catch (e: any) {
     return res
       .status(500)
@@ -58,17 +70,27 @@ export const createReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      const result = await fetch(`${reportProxy}/api/report/${req.params.id}`, {
-        method: "PUT",
-        body: JSON.stringify(req.body),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then(checkStatus)
-        .then((res: any) => res.json());
+      if (req.body.owner !== null && req.body.gps !== null) {
+        if (validateGps(req.body.gps))
+          res.status(400).send(errorResponse("Invalid gps"));
+        if (validateOwner(req.body.owner))
+          res.status(400).send(errorResponse("Invalid owner"));
+        const result = await fetch(
+          `${reportProxy}/api/report/${req.params.id}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(req.body),
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+          .then(checkStatus)
+          .then((res: any) => res.json());
 
-      return res
-        .json(successResponse(Constants.SUCCESS_UPDATE, result))
-        .status(200);
+        return res
+          .json(successResponse(Constants.SUCCESS_UPDATE, result))
+          .status(200);
+      }
+      return res.status(400).send(errorResponse("Invalid body"));
     }
     return res.status(400).send(errorResponse(Constants.BAD_REQUEST));
   } catch (e: any) {

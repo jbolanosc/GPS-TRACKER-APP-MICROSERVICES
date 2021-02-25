@@ -1,3 +1,4 @@
+import { OwnerModule } from './modules/owner/owner.module';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminModule } from './modules/admin/admin.module';
 import { GpsModule } from './modules/gps/gps.module';
@@ -30,6 +31,7 @@ export function tokenGetter() {
     AuthModule,
     GpsModule,
     AdminModule,
+    OwnerModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

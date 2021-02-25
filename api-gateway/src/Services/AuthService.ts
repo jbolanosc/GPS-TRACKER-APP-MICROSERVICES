@@ -23,22 +23,12 @@ export const validateToken = (
   if (authorization) {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(token, process.env.JWT_SECRET || "", (err, decode) => {
-      if (err) res.send({ msg: "invalid Token From AUTH" }).status(401);
+      if (err) res.status(401).send({ msg: "invalid Token From AUTH " + err });
       req.user = decode;
+      console.log(req.user);
       next();
     });
   } else {
-    res.send({ msg: "No token found" }).status(401);
-  }
-
-  if (authorization) {
-    const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
-    jwt.verify(token, process.env.JWT_SECRET || "", (err, decode) => {
-      if (err) res.send({ msg: "invalid Token From AUTH" }).status(401);
-      req.user = decode;
-      next();
-    });
-  } else {
-    res.send({ msg: "No token found" }).status(401);
+    res.status(401).send({ msg: "No token found" });
   }
 };

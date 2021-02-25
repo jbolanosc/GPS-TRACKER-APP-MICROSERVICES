@@ -34,17 +34,19 @@ export class GpsTableComponent implements OnInit {
     );
   }
 
-  private deleteGps(id: number): void {
-    this.gpsService.deleteGps(id).subscribe(
-      (res) => {
-        console.log('HTTP response', res);
-        this.showSuccess('Gps deleted');
-      },
-      (err) => {
-        console.log('HTTP Error', err);
-        this.showError('Error deleting gps');
-      }
-    );
+  deleteGps(id: number): void {
+    if (confirm('¿Are you sure you want to delete this item?')) {
+      this.gpsService.deleteGps(id).subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.showSuccess('Gps deleted');
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error deleting gps');
+        }
+      );
+    }
   }
 
   private showSuccess(message: string) {

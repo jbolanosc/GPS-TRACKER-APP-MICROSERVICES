@@ -113,12 +113,14 @@ services:
       GPS_PROXY: http://gps-api:80
       USER_PROXY: http://user-api:80
       REPORT_PROXY: http://report-api:80
+      OWNER_PROXY: http://owner-api:80
     ports:
       - "7100:3000"
     depends_on:
       - report-api
       - gps-api
       - user-api
+      - owner-api
     networks:
       report-network:
       user-network:

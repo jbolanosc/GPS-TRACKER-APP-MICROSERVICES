@@ -1,8 +1,8 @@
 <div
-  class="w-full bg-white min-h-full flex flex-col p-4 items-center justify-center"
+  class="w-full min-h-full bg-white flex flex-col items-center justify-center"
 >
   <p-table
-    [value]="reports"
+    [value]="owners"
     [paginator]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
@@ -11,13 +11,13 @@
     class="border-collapse w-full"
   >
     <ng-template pTemplate="caption">
-      <h2 class="text-center p-2 font-bold text-1xl">Reports</h2>
+      <h2 class="text-center p-2 font-bold">CLIENTS</h2>
       <div class="text-center">
         <button
           class="bg-green-600 hover:bg-green-700 p-2 rounded-lg"
-          routerLink="/admin/report/add"
+          routerLink="/owner/create"
         >
-          Add Report
+          Add Client
         </button>
       </div>
     </ng-template>
@@ -31,28 +31,43 @@
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
         >
-          Type
+          FIRSTNAME
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
         >
-          Description
+          LASTNAME
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
         >
-          gps
+          EMAIL
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
         >
-          OWNER
+          ADDRESS
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          COUNTRY
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          PHONE
+        </th>
+        <th
+          class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+        >
+          ACTIONS
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-report>
+    <ng-template pTemplate="body" let-owner>
       <tr
-        class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
+        class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 items-center"
       >
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
@@ -61,60 +76,98 @@
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >ID</span
           >
-          {{ report.id }}
+          {{ owner.id }}
         </td>
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
-            >type</span
+            >firstname</span
           >
-          {{ report.type }}
+          {{ owner.firstname }}
         </td>
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
-            >desc</span
+            >lastname</span
           >
-          {{ report.description }}
+          {{ owner.lastname }}
         </td>
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
-            >gps</span
+            >emial</span
           >
-          {{ report.gps }}
+          {{ owner.email }}
         </td>
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
-            >owner</span
+            >address</span
           >
-          {{ report.owner }}
+          {{ owner.address }}
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >country</span
+          >
+          <span>{{ owner.country }}</span>
+        </td>
+        <td
+          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >phone</span
+          >
+          <span>{{ owner.phone }}</span>
         </td>
         <td
           class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <button
             class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
-            routerLink="/admin/report/{{ report.id }}"
+            routerLink="/owner/{{ owner.id }}"
           >
             Watch
+          </button>
+          <button
+            class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            (click)="deleteOwner(owner.id)"
+          >
+            Delete
           </button>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="p-d-flex p-ai-center p-jc-between text-center p-2 font-bold">
-        In total there are {{ reports ? reports.length : 0 }} reports.
+        In total there are {{ owners ? owners.length : 0 }} owners.
       </div>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button
+        type="button"
+        icon="pi pi-plus"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button
+        type="button"
+        icon="pi pi-cloud"
+        styleClass="p-button-text"
+      ></p-button>
     </ng-template>
   </p-table>
 </div>

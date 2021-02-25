@@ -1,0 +1,125 @@
+<div
+  class="w-full min-h-full bg-white flex flex-col items-center justify-center"
+>
+  <h1 class="text-gradient text-4xl p-2 text-center font-bold">
+    OWNER MANAGER
+  </h1>
+  <form #createForm="ngForm" class="w-2/4">
+    <div>
+      <label class="block mb-2 text-primary">Firstname</label>
+      <input
+        id="firstname"
+        name="firstname"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="3"
+        [(ngModel)]="owner.firstname"
+        #firstname="ngModel"
+      />
+      <div
+        *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
+        class="text-red"
+      >
+        Invalid firstname
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Lastname</label>
+      <input
+        id="lastname"
+        name="lastname"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="3"
+        [(ngModel)]="owner.lastname"
+        #lastname="ngModel"
+      />
+      <div
+        *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)"
+        class="text-red"
+      >
+        Invalid lastname
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Email</label>
+      <input
+        id="email"
+        name="email"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="6"
+        [(ngModel)]="owner.email"
+        #email="ngModel"
+      />
+      <div
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="text-red"
+      >
+        Invalid email
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Address</label>
+      <input
+        id="address"
+        name="address"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="6"
+        [(ngModel)]="owner.address"
+        #address="ngModel"
+      />
+      <div
+        *ngIf="address.invalid && (address.dirty || address.touched)"
+        class="text-red"
+      >
+        Invalid address
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Country</label>
+      <input
+        id="country"
+        name="country"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="3"
+        [(ngModel)]="owner.country"
+        #country="ngModel"
+      />
+      <div
+        *ngIf="country.invalid && (country.dirty || country.touched)"
+        class="text-red"
+      >
+        Invalid country
+      </div>
+    </div>
+    <div>
+      <label class="block mb-2 text-primary">Phone</label>
+      <input
+        id="phone"
+        name="phone"
+        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        required
+        minlength="3"
+        [(ngModel)]="owner.phone"
+        #phone="ngModel"
+      />
+      <div
+        *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+        class="text-red"
+      >
+        Invalid phone
+      </div>
+    </div>
+    <div>
+      <input
+        class="cursor-pointer w-full btn-grad text-white font-bold py-2 px-4 mb-6 rounded"
+        type="submit"
+        [disabled]="!createForm.form.valid"
+        (click)="saveOwner()"
+      />
+    </div>
+  </form>
+</div>

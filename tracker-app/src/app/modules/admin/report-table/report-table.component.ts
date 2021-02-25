@@ -10,12 +10,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ReportTableComponent implements OnInit {
   reports: Report[] = [];
+
+  first: number = 0;
+
+  rows: number = 10;
+
   constructor(
     private reportService: ReportService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.loadReports();
+  }
+
+  private loadReports() {
     this.reportService.getReports().subscribe(
       (res) => {
         console.log('HTTP response', res);
@@ -29,11 +38,46 @@ export class ReportTableComponent implements OnInit {
     );
   }
 
+  deleteReport(id: number): void {
+    if (confirm('¿Are you sure you want to delete this item?')) {
+      this.reportService.deleteReport(id).subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.showSuccess('Report deleted');
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error deleting report');
+        }
+      );
+    }
+  }
+
   private showSuccess(message: string) {
     this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
     this.toastr.error(message, 'Action failed');
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean {
+    return this.reports ? this.first === this.reports.length - this.rows : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.reports ? this.first === 0 : true;
   }
 }

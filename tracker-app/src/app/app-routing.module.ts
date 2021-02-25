@@ -12,8 +12,8 @@ const routes: Routes = [
         component: LandingComponent,
       },
       {
-        path: 'user',
-        loadChildren: './modules/user/user.module#UserModule',
+        path: 'owner',
+        loadChildren: './modules/owener/owner.module#OwnerModule',
         canActivate: [AuthGuard],
       },
       {

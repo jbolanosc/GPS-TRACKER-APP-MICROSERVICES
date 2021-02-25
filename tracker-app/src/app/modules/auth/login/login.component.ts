@@ -28,16 +28,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login(this.user).subscribe(
-      (res) => {
+      (res: any) => {
         console.log('HTTP response', res);
+        localStorage.setItem('access_token', res.data);
         this.showSuccess();
-        this.router.navigate['gps'];
       },
-      (err) => {
+      (err: any) => {
         console.log('HTTP Error', err);
         this.showError();
       }
     );
+    this.router.navigate(['gps']);
   }
 
   showSuccess() {
