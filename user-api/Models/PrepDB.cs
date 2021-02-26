@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +27,9 @@ namespace user_api.Models
             {
                 System.Console.WriteLine("Seeding..");
                 context.UserItems.AddRange(
-                    new User() { email = "josue.carit@gmail.com", password = BC.HashPassword("nana"), role = "admin" },
-                    new User() { email = "josue.carit1@gmail.com", password = BC.HashPassword("nana1"), role = "checker" },
-                    new User() { email = "josue.carit2@gmail.com", password = BC.HashPassword("nana2"), role = "costumer-service" }
+                    new User() { email = "josue.carit@gmail.com", password = BC.HashPassword("nana"), role = "admin", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new User() { email = "josue.carit1@gmail.com", password = BC.HashPassword("nana1"), role = "checker", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new User() { email = "josue.carit2@gmail.com", password = BC.HashPassword("nana2"), role = "costumer-service", createdAt = DateTime.Now, updatedAt = DateTime.Now }
                 );
                 context.SaveChanges();
             }

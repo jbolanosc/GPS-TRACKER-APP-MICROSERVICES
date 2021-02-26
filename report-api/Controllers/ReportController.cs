@@ -46,6 +46,7 @@ namespace report_api.Controllers
         {
             if (ModelState.IsValid)
             {
+                report.createdAt = DateTime.Now;
                 _context.ReportItems.Add(report);
                 _context.SaveChanges();
 
@@ -65,6 +66,7 @@ namespace report_api.Controllers
 
             else if (ModelState.IsValid)
             {
+                report.updatedAt = DateTime.Now;
                 _context.Entry(report).State = EntityState.Modified;
                 _context.SaveChanges();
 

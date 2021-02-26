@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +26,9 @@ namespace owner_api.Models
             {
                 System.Console.WriteLine("Seeding..");
                 context.OwnerItems.AddRange(
-                    new Owner() { firstname = "Josue", lastname = "Bolaños", email = "bolanos.carit@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930" },
-                    new Owner() { firstname = "Josue", lastname = "Bolaños 2", email = "bolanos.carit2@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930" },
-                    new Owner() { firstname = "Josue", lastname = "Bolaños 3", email = "bolanos.carit3@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930" }
+                    new Owner() { firstname = "Josue", lastname = "Bolaños", email = "bolanos.carit@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Owner() { firstname = "Josue", lastname = "Bolaños 2", email = "bolanos.carit2@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Owner() { firstname = "Josue", lastname = "Bolaños 3", email = "bolanos.carit3@gmail.com", address = "122 mts south", country = "Costa rica", phone = "60403930", createdAt = DateTime.Now, updatedAt = DateTime.Now }
                 );
                 context.SaveChanges();
             }

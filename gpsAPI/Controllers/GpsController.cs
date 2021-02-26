@@ -47,6 +47,8 @@ namespace gpsAPI.Controllers
             {
                 System.Console.WriteLine(gps);
 
+                gps.createdAt = DateTime.Now;
+
                 _context.GpsItems.Add(gps);
                 _context.SaveChanges();
 
@@ -65,6 +67,8 @@ namespace gpsAPI.Controllers
                 {
                     return BadRequest();
                 }
+
+                gps.updatedAt = DateTime.Now;
 
                 _context.Entry(gps).State = EntityState.Modified;
                 _context.SaveChanges();

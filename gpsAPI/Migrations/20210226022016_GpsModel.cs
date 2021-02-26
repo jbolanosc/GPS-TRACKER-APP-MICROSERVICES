@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace gpsAPI.Migrations
 {
@@ -12,11 +13,13 @@ namespace gpsAPI.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     latitude = table.Column<double>(type: "float", nullable: false),
                     longitude = table.Column<double>(type: "float", nullable: false),
-                    owner = table.Column<long>(type: "bigint", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    owner = table.Column<long>(type: "bigint", nullable: true),
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

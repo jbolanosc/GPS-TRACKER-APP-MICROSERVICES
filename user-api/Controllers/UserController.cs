@@ -50,6 +50,7 @@ namespace user_api.Controllers
                 var email = _context.UserItems.FirstOrDefault(u => u.email == user.email);
                 if (email == null)
                 {
+                    user.createdAt = DateTime.Now;
                     user.password = BC.HashPassword(user.password);
                     _context.UserItems.Add(user);
                     _context.SaveChanges();
@@ -75,7 +76,7 @@ namespace user_api.Controllers
             }
             if (ModelState.IsValid)
             {
-
+                user.updatedAt = DateTime.Now;
                 _context.Entry(user).State = EntityState.Modified;
                 _context.SaveChanges();
 

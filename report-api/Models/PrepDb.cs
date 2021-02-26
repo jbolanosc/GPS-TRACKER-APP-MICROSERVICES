@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +26,9 @@ namespace report_api.Models
             {
                 System.Console.WriteLine("Seeding..");
                 context.ReportItems.AddRange(
-                    new Report() { type = "THIEFT", description = "device stolen days ago", gps = 1, owner = 1 },
-                    new Report() { type = "LOST", description = "computer lost", gps = 2, owner = 2 },
-                    new Report() { type = "LOST", description = "phone lost", gps = 3, owner = 1 }
+                    new Report() { type = "THIEFT", description = "device stolen days ago", status = "UNSOLVED", gps = 1, owner = 1, createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Report() { type = "LOST", description = "computer lost", status = "UNSOLVED", gps = 2, owner = 2, createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Report() { type = "LOST", description = "phone lost", status = "UNSOLVED", gps = 3, owner = 1, createdAt = DateTime.Now, updatedAt = DateTime.Now }
                 );
                 context.SaveChanges();
             }

@@ -1,4 +1,7 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace gpsAPI.Models
 {
     public class Gps
@@ -11,10 +14,12 @@ namespace gpsAPI.Models
         public double latitude { set; get; }
         [Required]
         public double longitude { set; get; }
-        [Required]
-        public long owner { set; get; }
+        public long? owner { set; get; }
         [Required]
         public string status { set; get; }
 
+        public DateTime? createdAt { get; set; }
+
+        public DateTime? updatedAt { get; set; }
     }
 }

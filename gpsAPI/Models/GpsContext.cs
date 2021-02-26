@@ -10,5 +10,6 @@ namespace gpsAPI.Models
         }
 
         public DbSet<Gps> GpsItems { get; set; }
+
     }
 }

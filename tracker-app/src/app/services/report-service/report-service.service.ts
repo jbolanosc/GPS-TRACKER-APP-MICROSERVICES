@@ -42,6 +42,10 @@ export class ReportService {
   }
 
   updateReport(report: Report, id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${tokenGetter()}`,
+    });
     console.log(report);
     console.log(JSON.stringify(report));
     return this.http.put<any>(`${environment.REPORT_API}/${id}`, report, {

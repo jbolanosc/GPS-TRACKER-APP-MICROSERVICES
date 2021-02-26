@@ -22,7 +22,7 @@ namespace owner_api.Controllers
             _context = context;
         }
 
-        // GET /api/oner
+        // GET /api/owner
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> GetOwnerItems()
         {
@@ -46,6 +46,8 @@ namespace owner_api.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                owner.createdAt = DateTime.UtcNow;
                 _context.OwnerItems.Add(owner);
                 _context.SaveChanges();
 
@@ -65,6 +67,7 @@ namespace owner_api.Controllers
 
             else if (ModelState.IsValid)
             {
+                owner.updatedAt = DateTime.Now;
                 _context.Entry(owner).State = EntityState.Modified;
                 _context.SaveChanges();
 

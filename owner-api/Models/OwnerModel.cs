@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace owner_api.Models
 {
@@ -17,5 +19,9 @@ namespace owner_api.Models
         public string country { get; set; }
         [Required]
         public string phone { get; set; }
+
+        public DateTime? createdAt { get; set; }
+
+        public DateTime? updatedAt { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +26,9 @@ namespace gpsAPI.Models
             {
                 System.Console.WriteLine("Seeding..");
                 context.GpsItems.AddRange(
-                    new Gps() { name = "GPS123ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active" },
-                    new Gps() { name = "GPS124ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active" },
-                    new Gps() { name = "GPS125ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active" }
+                    new Gps() { name = "GPS123ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Gps() { name = "GPS124ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new Gps() { name = "GPS125ARN", latitude = 0.00, longitude = 0.00, owner = 1, status = "active", createdAt = DateTime.Now, updatedAt = DateTime.Now }
                 );
                 context.SaveChanges();
             }
