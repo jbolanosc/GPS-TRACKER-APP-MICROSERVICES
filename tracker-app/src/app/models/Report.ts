@@ -4,4 +4,5 @@ export class Report {
   description: string;
   gps: number;
   owner: number;
+  status: string;
 }

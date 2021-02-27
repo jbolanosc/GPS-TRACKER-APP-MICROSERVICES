@@ -17,12 +17,18 @@ export class ReportFormComponent implements OnInit {
     { id: 1, label: 'THIEFT' },
     { id: 2, label: 'LOST' },
   ];
+  statusItems = [
+    { id: 1, label: 'UNSOLVED' },
+    { id: 2, label: 'RESOLVED' },
+  ];
+
   report: Report = {
     id: 0,
     type: '',
     description: '',
     gps: 0,
     owner: 0,
+    status: '',
   };
 
   constructor(

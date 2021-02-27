@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'owner',
-        loadChildren: './modules/owener/owner.module#OwnerModule',
+        loadChildren: './modules/owner/owner.module#OwnerModule',
         canActivate: [AuthGuard],
       },
       {

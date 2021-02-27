@@ -8,7 +8,24 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./gps-table.component.scss'],
 })
 export class GpsTableComponent implements OnInit {
-  gps: Gps[] = [];
+  gps: Gps[] = [
+    {
+      id: 123,
+      name: 'gps1',
+      latitude: 0,
+      longitude: 0,
+      owner: 2,
+      status: 'active',
+    },
+    {
+      id: 124,
+      name: 'gps123',
+      latitude: 0,
+      longitude: 0,
+      owner: 2,
+      status: 'active',
+    },
+  ];
 
   first: number = 0;
 

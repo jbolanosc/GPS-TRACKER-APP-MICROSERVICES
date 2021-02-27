@@ -1,3 +1,4 @@
+import { AuthService } from './../auth-service/auth.service';
 import { tokenGetter } from 'src/app/app.module';
 import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
@@ -9,12 +10,12 @@ import { Report } from '../../models/Report';
   providedIn: 'root',
 })
 export class ReportService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getReports(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(`${environment.REPORT_API}`, { headers: headers });
   }
@@ -22,7 +23,7 @@ export class ReportService {
   getReport(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(`${environment.REPORT_API}/${id}`, {
       headers: headers,
@@ -32,7 +33,7 @@ export class ReportService {
   createReport(report: Report): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(report);
     console.log(JSON.stringify(report));
@@ -44,7 +45,7 @@ export class ReportService {
   updateReport(report: Report, id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(report);
     console.log(JSON.stringify(report));
@@ -56,7 +57,7 @@ export class ReportService {
   deleteReport(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.delete<any>(`${environment.REPORT_API}/${id}`, {
       headers: headers,

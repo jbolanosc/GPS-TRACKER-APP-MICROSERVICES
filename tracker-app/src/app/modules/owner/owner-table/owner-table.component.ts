@@ -9,7 +9,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./owner-table.component.scss'],
 })
 export class OwnerTableComponent implements OnInit {
-  owners: Owner[] = [];
+  owners: Owner[] = [
+    {
+      id: 2,
+      firstname: 'jOSUE',
+      lastname: 'Bolaños',
+      email: 'josue.carit@gmail.com',
+      address: '133 fruo south',
+      country: 'Costa RIca',
+      phone: '1244',
+    },
+  ];
 
   first: number = 0;
 
@@ -39,16 +49,18 @@ export class OwnerTableComponent implements OnInit {
   }
 
   deleteOwner(id: number): void {
-    this.ownerService.deleteOwner(id).subscribe(
-      (res) => {
-        console.log('HTTP response', res);
-        this.showSuccess('Owner deleted');
-      },
-      (err) => {
-        console.log('HTTP Error', err);
-        this.showError('Error deleting owner');
-      }
-    );
+    if (confirm('¿Are you sure you want to delete this item?')) {
+      this.ownerService.deleteOwner(id).subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.showSuccess('Owner deleted');
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error deleting owner');
+        }
+      );
+    }
   }
 
   private showSuccess(message: string) {

@@ -1,13 +1,15 @@
 <div
-  class="w-full min-h-full bg-white flex flex-col items-center justify-center"
+  class="w-full min-h-screen bg-white flex flex-col items-center justify-center"
 >
   <p-table
+    #dt1
     [value]="gps"
     [paginator]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['id', 'name', 'latitude', 'owner', 'status']"
     class="border-collapse w-full"
   >
     <ng-template pTemplate="caption">
@@ -19,39 +21,59 @@
         >
           Add Gps
         </button>
+        <div class="p-d-flex my-2">
+          <span
+            class="p-input-icon-left p-ml-auto border border-blue-900 rounded-md"
+          >
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              class="ml-8 borde p-1"
+              type="text"
+              (input)="dt1.filterGlobal($event.target.value, 'contains')"
+              placeholder="Filter"
+            />
+          </span>
+        </div>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="id"
         >
-          ID
+          ID <p-sortIcon field="id"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="name"
         >
-          NAME
+          NAME <p-sortIcon field="name"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="latitude"
         >
-          LATITUDE
+          LATITUDE <p-sortIcon field="latitude"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="longitude"
         >
-          LONGITUDE
+          LONGITUDE <p-sortIcon field="longitude"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="owner"
         >
-          OWNER
+          OWNER <p-sortIcon field="owner"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="status"
         >
-          STATUS
+          STATUS <p-sortIcon field="status"></p-sortIcon>
         </th>
       </tr>
     </ng-template>
@@ -60,7 +82,7 @@
         class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 items-center"
       >
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="text-center break-words mobile-center w-full lg:w-auto p-3 text-gray-800 border block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -69,63 +91,61 @@
           {{ gps.id }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >name</span
           >
-          {{ gps.name }}
+          <span> {{ gps.name }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >latitude</span
           >
-          {{ gps.latitude }}
+          <span class="text-center py-1"> {{ gps.latitude }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 items-center border block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >longitude</span
           >
-          {{ gps.longitude }}
+          <span class="text-center py-1"> {{ gps.longitude }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >owner</span
           >
-          {{ gps.owner }}
+          <span class="text-center py-4"> {{ gps.owner }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >Status</span
           >
-          <span [class]="'product-badge status-' + gps.status.toLowerCase()">{{
-            gps.status
-          }}</span>
+          <span class="text-center py-1">{{ gps.status }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center lg:w-auto p-3 text-gray-800 text-center border block lg:table-cell relative lg:static"
         >
           <button
-            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             routerLink="/gps/{{ gps.id }}"
           >
             Watch
           </button>
           <button
-            class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             (click)="deleteGps(gps.id)"
           >
             Delete

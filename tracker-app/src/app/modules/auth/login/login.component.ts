@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
         this.showError();
       }
     );
-    this.router.navigate(['gps']);
   }
 
   showSuccess() {
+    this.router.navigate(['gps']);
     this.toastr.success('Welcome', 'Login Success');
   }
 

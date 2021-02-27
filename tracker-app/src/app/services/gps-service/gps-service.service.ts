@@ -1,21 +1,21 @@
+import { AuthService } from './../auth-service/auth.service';
 import { Observable } from 'rxjs';
 import { Gps } from './../../models/Gps';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
-import { tokenGetter } from 'src/app/app.module';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GpsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllGps(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(environment.GPS_API, { headers: headers });
   }
@@ -23,7 +23,7 @@ export class GpsService {
   getGps(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(`${environment.GPS_API}/${id}`, {
       headers: headers,
@@ -33,7 +33,7 @@ export class GpsService {
   createGps(gps: Gps): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(gps);
     console.log(JSON.stringify(gps));
@@ -45,7 +45,7 @@ export class GpsService {
   updateGps(gps: Gps, id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(gps);
     console.log(JSON.stringify(gps));
@@ -57,7 +57,7 @@ export class GpsService {
   deleteGps(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.delete<any>(`${environment.GPS_API}/${id}`, {
       headers: headers,

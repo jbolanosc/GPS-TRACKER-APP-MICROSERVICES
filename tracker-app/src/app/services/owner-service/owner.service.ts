@@ -1,4 +1,4 @@
-import { tokenGetter } from 'src/app/app.module';
+import { AuthService } from './../auth-service/auth.service';
 import { Observable } from 'rxjs';
 import { Owner } from './../../models/Owner';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,12 +10,12 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class OwnerService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllOwners(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(environment.OWNER_API, { headers: headers });
   }
@@ -23,7 +23,7 @@ export class OwnerService {
   getOwner(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.get(`${environment.OWNER_API}/${id}`, {
       headers: headers,
@@ -33,7 +33,7 @@ export class OwnerService {
   createOwner(owner: Owner): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(owner);
     console.log(JSON.stringify(owner));
@@ -45,7 +45,7 @@ export class OwnerService {
   updateOwner(owner: Owner, id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     console.log(owner);
     console.log(JSON.stringify(owner));
@@ -57,7 +57,7 @@ export class OwnerService {
   deleteOwner(id: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${tokenGetter()}`,
+      Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
     return this.http.delete<any>(`${environment.OWNER_API}/${id}`, {
       headers: headers,

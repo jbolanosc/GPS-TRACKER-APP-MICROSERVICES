@@ -23,4 +23,8 @@ export class AuthService {
   public get loggedIn(): boolean {
     return localStorage.getItem('access_token') !== null;
   }
+
+  public tokenGetter() {
+    return localStorage.getItem('access_token');
+  }
 }

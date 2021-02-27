@@ -2,12 +2,14 @@
   class="w-full min-h-full bg-white flex flex-col items-center justify-center"
 >
   <p-table
+    #dt1
     [value]="owners"
     [paginator]="true"
     [rows]="10"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['id', 'firstname', 'lastname']"
     class="border-collapse w-full"
   >
     <ng-template pTemplate="caption">
@@ -19,44 +21,65 @@
         >
           Add Client
         </button>
+        <div class="p-d-flex my-2">
+          <span
+            class="p-input-icon-left p-ml-auto border border-blue-900 rounded-md"
+          >
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              class="ml-8 borde p-1"
+              type="text"
+              (input)="dt1.filterGlobal($event.target.value, 'contains')"
+              placeholder="Filter"
+            />
+          </span>
+        </div>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="id"
         >
-          ID
+          ID <p-sortIcon field="id"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="firstname"
         >
-          FIRSTNAME
+          FIRSTNAME <p-sortIcon field="firstname"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="lastname"
         >
-          LASTNAME
+          LASTNAME <p-sortIcon field="lastname"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="email"
         >
-          EMAIL
+          EMAIL <p-sortIcon field="email"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="address"
         >
-          ADDRESS
+          ADDRESS <p-sortIcon field="address"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="country"
         >
-          COUNTRY
+          COUNTRY <p-sortIcon field="country"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
+          pSortableColumn="phone"
         >
-          PHONE
+          PHONE <p-sortIcon field="phone"></p-sortIcon>
         </th>
         <th
           class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"
@@ -70,7 +93,7 @@
         class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 items-center"
       >
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -79,7 +102,7 @@
           {{ owner.id }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -88,7 +111,7 @@
           {{ owner.firstname }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -97,16 +120,16 @@
           {{ owner.lastname }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
-            >emial</span
+            >email</span
           >
           {{ owner.email }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -115,7 +138,7 @@
           {{ owner.address }}
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -124,7 +147,7 @@
           <span>{{ owner.country }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -133,16 +156,16 @@
           <span>{{ owner.phone }}</span>
         </td>
         <td
-          class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <button
-            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            class="bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             routerLink="/owner/{{ owner.id }}"
           >
             Watch
           </button>
           <button
-            class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 rounded-lg"
+            class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             (click)="deleteOwner(owner.id)"
           >
             Delete
