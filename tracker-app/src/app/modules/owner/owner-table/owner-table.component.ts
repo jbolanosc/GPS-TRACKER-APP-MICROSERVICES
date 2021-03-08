@@ -2,6 +2,7 @@ import { OwnerService } from './../../../services/owner-service/owner.service';
 import { Owner } from './../../../models/Owner';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-owner-table',
@@ -27,7 +28,8 @@ export class OwnerTableComponent implements OnInit {
 
   constructor(
     private ownerService: OwnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -49,18 +51,21 @@ export class OwnerTableComponent implements OnInit {
   }
 
   deleteOwner(id: number): void {
-    if (confirm('¿Are you sure you want to delete this item?')) {
-      this.ownerService.deleteOwner(id).subscribe(
-        (res) => {
-          console.log('HTTP response', res);
-          this.showSuccess('Owner deleted');
-        },
-        (err) => {
-          console.log('HTTP Error', err);
-          this.showError('Error deleting owner');
-        }
-      );
-    }
+    this.confirmationService.confirm({
+      message: '¿Are you sure you want to delete this item?',
+      accept: () => {
+        this.ownerService.deleteOwner(id).subscribe(
+          (res) => {
+            console.log('HTTP response', res);
+            this.showSuccess('Owner deleted');
+          },
+          (err) => {
+            console.log('HTTP Error', err);
+            this.showError('Error deleting owner');
+          }
+        );
+      },
+    });
   }
 
   private showSuccess(message: string) {

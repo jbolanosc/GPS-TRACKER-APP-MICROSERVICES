@@ -2,6 +2,7 @@ import { ReportService } from './../../../services/report-service/report-service
 import { Report } from './../../../models/Report';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-report-table',
@@ -17,7 +18,8 @@ export class ReportTableComponent implements OnInit {
 
   constructor(
     private reportService: ReportService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -39,18 +41,21 @@ export class ReportTableComponent implements OnInit {
   }
 
   deleteReport(id: number): void {
-    if (confirm('¿Are you sure you want to delete this item?')) {
-      this.reportService.deleteReport(id).subscribe(
-        (res) => {
-          console.log('HTTP response', res);
-          this.showSuccess('Report deleted');
-        },
-        (err) => {
-          console.log('HTTP Error', err);
-          this.showError('Error deleting report');
-        }
-      );
-    }
+    this.confirmationService.confirm({
+      message: '¿Are you sure you want to delete this item?',
+      accept: () => {
+        this.reportService.deleteReport(id).subscribe(
+          (res) => {
+            console.log('HTTP response', res);
+            this.showSuccess('Report deleted');
+          },
+          (err) => {
+            console.log('HTTP Error', err);
+            this.showError('Error deleting report');
+          }
+        );
+      },
+    });
   }
 
   private showSuccess(message: string) {

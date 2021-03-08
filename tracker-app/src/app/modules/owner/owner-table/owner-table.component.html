@@ -1,6 +1,10 @@
 <div
   class="w-full min-h-full bg-white flex flex-col items-center justify-center"
 >
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+  ></p-confirmDialog>
   <p-table
     #dt1
     [value]="owners"
@@ -165,6 +169,8 @@
             Watch
           </button>
           <button
+            icon="pi pi-times"
+            label="Confirm"
             class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             (click)="deleteOwner(owner.id)"
           >

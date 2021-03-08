@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
     password: '',
     role: '',
   };
-  error: string = '';
 
   constructor(
     private toastr: ToastrService,

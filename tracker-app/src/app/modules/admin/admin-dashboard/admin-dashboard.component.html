@@ -3,21 +3,20 @@
     class="bg-white p-2 rounded-lg shadow flex flex-col flex-wrap justify-center content-center"
   >
     <svg
-      class="object-fill h-40 md:object-scale-down stroke-current text-complementary"
+      class="object-fill h-40 md:object-scale-down stroke-current text-blue-800"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
+      viewBox="0 0 20 20"
+      fill="currentColor"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"
+        fill-rule="evenodd"
+        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
+        clip-rule="evenodd"
       />
     </svg>
-    <h2 class="text-1xl p-2 text-center font-bold">View Reports</h2>
-    <button class="btn border-primary border-2" routerLink="/admin/reports">
+
+    <h2 class="text-2xl p-2 text-center font-bold">View Reports</h2>
+    <button class="btn border-blue-600 border-2" routerLink="/admin/reports">
       Go
     </button>
   </div>
@@ -25,7 +24,7 @@
     class="bg-white p-2 rounded-lg shadow flex flex-col flex-wrap justify-center content-center"
   >
     <svg
-      class="object-fill h-40 md:object-scale-down stroke-current text-complementary"
+      class="object-fill h-40 md:object-scale-down stroke-current text-blue-800"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       fill="currentColor"
@@ -36,8 +35,8 @@
         clip-rule="evenodd"
       />
     </svg>
-    <h2 class="text-1xl p-2 text-center font-bold">Create Report</h2>
-    <button class="btn border-primary border-2" routerLink="/admin/report/add">
+    <h2 class="text-2xl p-2 text-center font-bold">Create Report</h2>
+    <button class="btn border-blue-600 border-2" routerLink="/admin/report/add">
       Go
     </button>
   </div>
@@ -45,7 +44,7 @@
     class="bg-white p-2 rounded-lg shadow flex flex-col flex-wrap justify-center content-center"
   >
     <svg
-      class="object-fill h-40 md:object-scale-down stroke-current text-complementary"
+      class="object-fill h-40 md:object-scale-down stroke-blue-800 text-blue-800"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -58,8 +57,10 @@
         d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
       />
     </svg>
-    <h2 class="text-1xl p-2 text-center font-bold">Reports Charts</h2>
+    <h2 class="text-2xl p-2 text-center font-bold">Reports Charts</h2>
 
-    <button class="btn border-primary border-2" disabled="true">Go</button>
+    <button class="btn border-blue-600 border-2" routerLink="/admin/charts">
+      Go
+    </button>
   </div>
 </div>

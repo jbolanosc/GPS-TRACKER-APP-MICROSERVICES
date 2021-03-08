@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GpsService } from './../../../services/gps-service/gps-service.service';
 import { Gps } from './../../../models/Gps';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-gps-table',
   templateUrl: './gps-table.component.html',
@@ -31,7 +32,11 @@ export class GpsTableComponent implements OnInit {
 
   rows: number = 10;
 
-  constructor(private gpsService: GpsService, private toastr: ToastrService) {}
+  constructor(
+    private gpsService: GpsService,
+    private toastr: ToastrService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.loadAllGps();
@@ -52,18 +57,21 @@ export class GpsTableComponent implements OnInit {
   }
 
   deleteGps(id: number): void {
-    if (confirm('¿Are you sure you want to delete this item?')) {
-      this.gpsService.deleteGps(id).subscribe(
-        (res) => {
-          console.log('HTTP response', res);
-          this.showSuccess('Gps deleted');
-        },
-        (err) => {
-          console.log('HTTP Error', err);
-          this.showError('Error deleting gps');
-        }
-      );
-    }
+    this.confirmationService.confirm({
+      message: '¿Are you sure you want to delete this item?',
+      accept: () => {
+        this.gpsService.deleteGps(id).subscribe(
+          (res) => {
+            console.log('HTTP response', res);
+            this.showSuccess('Gps deleted');
+          },
+          (err) => {
+            console.log('HTTP Error', err);
+            this.showError('Error deleting gps');
+          }
+        );
+      },
+    });
   }
 
   private showSuccess(message: string) {

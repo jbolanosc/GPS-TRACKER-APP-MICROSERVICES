@@ -1,3 +1,5 @@
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { OwnerService } from './../../services/owner-service/owner.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +18,8 @@ import { OwnerTableComponent } from './owner-table/owner-table.component';
     TableModule,
     FormsModule,
     ReactiveFormsModule,
+    ConfirmDialogModule,
   ],
-  providers: [OwnerService],
+  providers: [OwnerService, ConfirmationService],
 })
 export class OwnerModule {}

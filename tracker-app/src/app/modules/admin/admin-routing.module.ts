@@ -1,3 +1,4 @@
+import { ReportChartsComponent } from './report-charts/report-charts.component';
 import { ReportFormComponent } from './report-form/report-form.component';
 import { ReportTableComponent } from './report-table/report-table.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'report/add',
     component: ReportFormComponent,
+  },
+  {
+    path: 'charts',
+    component: ReportChartsComponent,
   },
 ];
 

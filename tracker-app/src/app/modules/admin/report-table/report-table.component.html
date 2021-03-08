@@ -1,6 +1,10 @@
 <div
   class="w-full bg-white min-h-screen flex flex-col p-4 items-center justify-center"
 >
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+  ></p-confirmDialog>
   <p-table
     #dt1
     [value]="reports"
@@ -76,7 +80,7 @@
         class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
       >
         <td
-          class="w-full break-words break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -85,7 +89,7 @@
           {{ report.id }}
         </td>
         <td
-          class="w-full break-words break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -94,7 +98,7 @@
           {{ report.type }}
         </td>
         <td
-          class="w-full break-words break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -103,7 +107,7 @@
           {{ report.description }}
         </td>
         <td
-          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
@@ -112,13 +116,23 @@
           {{ report.gps }}
         </td>
         <td
-          class="w-full break-words mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
         >
           <span
             class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
             >owner</span
           >
           {{ report.owner }}
+        </td>
+
+        <td
+          class="w-full mobile-center break-words lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
+        >
+          <span
+            class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"
+            >Status</span
+          >
+          {{ report.status }}
         </td>
         <td
           class="w-full mobile-center lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static"
@@ -130,6 +144,8 @@
             Watch
           </button>
           <button
+            icon="pi pi-times"
+            label="Confirm"
             class="bg-red focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 p-2 m-1 rounded-lg"
             (click)="deleteReport(report.id)"
           >
