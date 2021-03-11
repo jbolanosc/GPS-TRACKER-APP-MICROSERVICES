@@ -1,3 +1,5 @@
+import { OwnerService } from './../../services/owner-service/owner.service';
+import { GpsService } from './../../services/gps-service/gps-service.service';
 import { ReportService } from './../../services/report-service/report-service.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +29,8 @@ import { ReportChartsComponent } from './report-charts/report-charts.component';
     TableModule,
     ChartModule,
     ConfirmDialogModule,
+    ReactiveFormsModule,
   ],
-  providers: [ReportService, ConfirmationService],
+  providers: [ReportService, ConfirmationService, OwnerService, GpsService],
 })
 export class AdminModule {}

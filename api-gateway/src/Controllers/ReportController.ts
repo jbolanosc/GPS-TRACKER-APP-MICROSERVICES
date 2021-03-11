@@ -41,11 +41,12 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const createReport = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     if (req.body.owner !== null && req.body.gps !== null) {
-      if (validateGps(req.body.gps))
-        res.status(400).send(errorResponse("Invalid gps"));
-      if (validateOwner(req.body.owner))
-        res.status(400).send(errorResponse("Invalid owner"));
+      if ((await validateGps(req.body.gps)) === false)
+        return res.status(400).send(errorResponse("Invalid gps"));
+      if ((await validateOwner(req.body.owner)) == false)
+        return res.status(400).send(errorResponse("Invalid owner"));
 
       const result = await fetch(`${reportProxy}/api/report`, {
         method: "POST",
@@ -70,11 +71,12 @@ export const createReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
+      console.log(req.body);
       if (req.body.owner !== null && req.body.gps !== null) {
-        if (validateGps(req.body.gps))
-          res.status(400).send(errorResponse("Invalid gps"));
-        if (validateOwner(req.body.owner))
-          res.status(400).send(errorResponse("Invalid owner"));
+        if ((await validateGps(req.body.gps)) === false)
+          return res.status(400).send(errorResponse("Invalid gps"));
+        if ((await validateOwner(req.body.owner)) === false)
+          return res.status(400).send(errorResponse("Invalid owner"));
         const result = await fetch(
           `${reportProxy}/api/report/${req.params.id}`,
           {

@@ -104,6 +104,8 @@ export const validateOwner = async (id: number) => {
     .then(checkStatus)
     .then((res: any) => res.json());
 
+  console.log("owner");
+  console.log(owner);
   if (owner) return true;
 
   return false;

@@ -62,14 +62,24 @@
     <div>
       <label class="block mb-2 text-primary">Owner</label>
       <input
-        id="owner"
-        name="owner"
-        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
-        required
         type="text"
-        [(ngModel)]="gps.owner"
+        name="owners"
+        class="w-full p-2 mb-2 text-primary border-2 border-primary outline-none focus:bg-gray-300"
+        list="owners"
+        required
+        [(ngModel)]="selectedOwner"
         #owner="ngModel"
+        (change)="saveOwner($event)"
       />
+      <datalist id="owners">
+        <option
+          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+          *ngFor="let o of owners"
+          [value]="o.id"
+        >
+          {{ o.firstname }} {{ o.lastname }}
+        </option>
+      </datalist>
       <div
         *ngIf="owner.invalid && (owner.dirty || owner.touched)"
         class="text-red"
@@ -86,7 +96,7 @@
         [(ngModel)]="gps.status"
         #status="ngModel"
       >
-        <option *ngFor="let state of statusOptions" [value]="state.label">
+        <option *ngFor="let state of statusOptions">
           {{ state.label }}
         </option>
       </select>

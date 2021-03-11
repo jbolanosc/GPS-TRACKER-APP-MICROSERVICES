@@ -26,7 +26,6 @@ export const validateToken = (
       if (err)
         return res.status(401).send({ msg: "invalid Token From AUTH " + err });
       req.user = decode;
-      console.log(req.user);
       return next();
     });
   } else {

@@ -13,6 +13,8 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         [(ngModel)]="report.type"
         #type="ngModel"
+        [value]="report.type"
+        required
       >
         <option *ngFor="let type of types" [value]="type.label">
           {{ type.label }}
@@ -47,14 +49,24 @@
     <div>
       <label class="block mb-2 text-primary">GPS</label>
       <input
-        id="gps"
+        type="text"
         name="gps"
-        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        class="w-full p-2 mb-2 text-primary border-2 border-primary outline-none focus:bg-gray-300"
+        list="allGps"
         required
-        type="number"
         [(ngModel)]="report.gps"
         #gps="ngModel"
+        (change)="saveGps($event)"
       />
+      <datalist id="allGps">
+        <option
+          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+          *ngFor="let g of allGps"
+          [value]="g.id"
+        >
+          {{ g.name }}
+        </option>
+      </datalist>
       <div *ngIf="gps.invalid && (gps.dirty || gps.touched)" class="text-red">
         Invalid gps
       </div>
@@ -62,14 +74,24 @@
     <div>
       <label class="block mb-2 text-primary">Owner</label>
       <input
-        id="owner"
-        name="owner"
-        class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+        type="text"
+        name="owners"
+        class="w-full p-2 mb-2 text-primary border-2 border-primary outline-none focus:bg-gray-300"
+        list="owners"
         required
-        type="number"
         [(ngModel)]="report.owner"
         #owner="ngModel"
+        (change)="saveOwner($event)"
       />
+      <datalist id="owners" maxlength="2">
+        <option
+          class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
+          *ngFor="let o of owners"
+          [value]="o.id"
+        >
+          {{ o.firstname }} {{ o.lastname }}
+        </option>
+      </datalist>
       <div
         *ngIf="owner.invalid && (owner.dirty || owner.touched)"
         class="text-red"
@@ -85,6 +107,8 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none bg-gray-300"
         [(ngModel)]="report.status"
         #status="ngModel"
+        [value]="report.status"
+        required
       >
         <option
           class="text-black"

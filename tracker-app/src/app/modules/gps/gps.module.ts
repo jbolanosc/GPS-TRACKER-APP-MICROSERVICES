@@ -1,3 +1,4 @@
+import { OwnerService } from './../../services/owner-service/owner.service';
 import { ConfirmationService } from 'primeng/api';
 import { MarkerService } from './../../services/marker-service/marker.service';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,6 @@ import { MapComponent } from './map/map.component';
     ReactiveFormsModule,
     ConfirmDialogModule,
   ],
-  providers: [GpsService, MarkerService, ConfirmationService],
+  providers: [GpsService, MarkerService, ConfirmationService, OwnerService],
 })
 export class GpsModule {}
