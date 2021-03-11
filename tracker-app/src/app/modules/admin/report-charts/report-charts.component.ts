@@ -59,7 +59,7 @@ export class ReportChartsComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err);
-        this.showError('Error loading reports');
+        this.showError('Error loading reports: ' + err);
       }
     );
   }

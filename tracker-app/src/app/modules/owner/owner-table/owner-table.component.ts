@@ -45,7 +45,7 @@ export class OwnerTableComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err);
-        this.showError('Error loading owners');
+        this.showError('Error loading owners: ' + err.message);
       }
     );
   }
@@ -61,7 +61,7 @@ export class OwnerTableComponent implements OnInit {
           },
           (err) => {
             console.log('HTTP Error', err);
-            this.showError('Error deleting owner');
+            this.showError('Error deleting owner: ' + err.message);
           }
         );
       },

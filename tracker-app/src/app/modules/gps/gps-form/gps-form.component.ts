@@ -21,9 +21,9 @@ export class GpsFormComponent implements OnInit {
   gps: Gps = {
     id: 0,
     name: null,
-    latitude: 0,
-    longitude: 0,
-    owner: 0,
+    latitude: null,
+    longitude: null,
+    owner: null,
     status: null,
   };
   owners = [
@@ -65,7 +65,7 @@ export class GpsFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error loading gps');
+          this.showError('Error loading gps: ' + err.message);
         }
       );
       this.edit = true;
@@ -81,7 +81,7 @@ export class GpsFormComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err);
-        this.showError('Error loading owners list ' + err);
+        this.showError('Error loading owners list: ' + err.message);
       }
     );
   }
@@ -96,7 +96,7 @@ export class GpsFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating gps');
+          this.showError('Error updating gps: ' + err.message);
         }
       );
     } else {
@@ -108,7 +108,7 @@ export class GpsFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error creating gps');
+          this.showError('Error creating gps: ' + err.message);
         }
       );
     }
@@ -128,7 +128,7 @@ export class GpsFormComponent implements OnInit {
     let id = e.target.value;
     console.log(id);
     let list = this.owners.filter((x) => x.id == id)[0];
-    list ? (this.gps.owner = parseInt(id)) : '';
+    list ? (this.gps.owner = parseInt(id)) : this.showError('Invalid Onwer');
     console.log(this.gps);
   }
 }

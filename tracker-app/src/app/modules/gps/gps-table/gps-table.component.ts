@@ -51,7 +51,7 @@ export class GpsTableComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err);
-        this.showError('Error loading gps');
+        this.showError('Error loading gps: ' + err.message);
       }
     );
   }
@@ -67,7 +67,7 @@ export class GpsTableComponent implements OnInit {
           },
           (err) => {
             console.log('HTTP Error', err);
-            this.showError('Error deleting gps');
+            this.showError('Error deleting gps: ' + err.message);
           }
         );
       },

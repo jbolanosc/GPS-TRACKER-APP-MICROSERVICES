@@ -68,7 +68,6 @@ export class ReportFormComponent implements OnInit {
     this.loadReport();
     this.loadGps();
     this.loadOwners();
-    console.log(this.allGps);
   }
 
   private loadReport() {
@@ -83,7 +82,7 @@ export class ReportFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err.message);
-          this.showError('Error loading reports: ');
+          this.showError('Error loading reports: ' + err.message);
         }
       );
     }
@@ -100,7 +99,7 @@ export class ReportFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating report');
+          this.showError('Error updating report: ' + err);
         }
       );
     } else {
@@ -111,7 +110,7 @@ export class ReportFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating report');
+          this.showError('Error updating report: ' + err);
         }
       );
     }
@@ -135,7 +134,7 @@ export class ReportFormComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err.message);
-        this.showError('Error loading gps');
+        this.showError('Error loading gps: ' + err.message);
       }
     );
   }
@@ -149,7 +148,7 @@ export class ReportFormComponent implements OnInit {
       },
       (err) => {
         console.log('HTTP Error', err.message);
-        this.showError('Error loading owners');
+        this.showError('Error loading owners: ' + err.message);
       }
     );
   }
@@ -158,7 +157,7 @@ export class ReportFormComponent implements OnInit {
     let id = e.target.value;
     console.log(id);
     let list = this.owners.filter((x) => x.id == id)[0];
-    list ? (this.report.gps = parseInt(id)) : '';
+    list ? (this.report.gps = parseInt(id)) : this.showError('INVALID GPS');
     console.log(this.report);
   }
 
@@ -166,7 +165,7 @@ export class ReportFormComponent implements OnInit {
     let id = e.target.value;
     console.log(id);
     let list = this.owners.filter((x) => x.id == id)[0];
-    list ? (this.report.owner = parseInt(id)) : '';
+    list ? (this.report.owner = parseInt(id)) : this.showError('INVALID GPS');
     console.log(this.report);
   }
 }

@@ -30,21 +30,21 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         console.log('HTTP response', res);
         localStorage.setItem('access_token', res.data);
-        this.showSuccess();
+        this.showSuccess('Welcome');
       },
       (err: any) => {
         console.log('HTTP Error', err);
-        this.showError();
+        this.showError(err.message);
       }
     );
   }
 
-  showSuccess() {
+  showSuccess(message: string) {
     this.router.navigate(['gps']);
-    this.toastr.success('Welcome', 'Login Success');
+    this.toastr.success('Welcome', message);
   }
 
-  showError() {
-    this.toastr.error('Invalid user or password', 'Login failed');
+  showError(message: string) {
+    this.toastr.error('Invalid user or password', message);
   }
 }

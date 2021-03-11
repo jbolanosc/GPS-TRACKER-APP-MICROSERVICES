@@ -15,12 +15,12 @@ export class OwnerFormComponent implements OnInit {
   private param: number = 0;
   owner: Owner = {
     id: 0,
-    firstname: '',
-    lastname: '',
-    email: '',
-    address: '',
-    country: '',
-    phone: '',
+    firstname: null,
+    lastname: null,
+    email: null,
+    address: null,
+    country: null,
+    phone: null,
   };
 
   constructor(
@@ -46,7 +46,7 @@ export class OwnerFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error loading owner');
+          this.showError('Error loading owner: ' + err.message);
         }
       );
       this.edit = true;
@@ -63,7 +63,7 @@ export class OwnerFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating owner');
+          this.showError('Error updating owner: ' + err.message);
         }
       );
     } else {
@@ -75,7 +75,7 @@ export class OwnerFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error creating owner');
+          this.showError('Error creating owner: ' + err.message);
         }
       );
     }
