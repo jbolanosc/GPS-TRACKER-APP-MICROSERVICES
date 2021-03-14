@@ -1,33 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GpsService } from './../../../services/gps-service/gps-service.service';
 import { Gps } from './../../../models/Gps';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
+import { interval, Subscription } from 'rxjs';
+import { switchMap, startWith } from 'rxjs/operators';
 @Component({
   selector: 'app-gps-table',
   templateUrl: './gps-table.component.html',
   styleUrls: ['./gps-table.component.scss'],
 })
-export class GpsTableComponent implements OnInit {
-  gps: Gps[] = [
-    {
-      id: 123,
-      name: 'gps1',
-      latitude: 0,
-      longitude: 0,
-      owner: 2,
-      status: 'active',
-    },
-    {
-      id: 124,
-      name: 'gps123',
-      latitude: 0,
-      longitude: 0,
-      owner: 2,
-      status: 'active',
-    },
-  ];
-
+export class GpsTableComponent implements OnInit, OnDestroy {
+  gps: Gps[] = [];
+  subscription: Subscription;
   first: number = 0;
 
   rows: number = 10;
@@ -41,19 +26,26 @@ export class GpsTableComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllGps();
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   private loadAllGps() {
-    this.gpsService.getAllGps().subscribe(
-      (res) => {
-        console.log('HTTP response', res);
-        this.gps = res.data;
-        this.showSuccess('Gps loaded');
-      },
-      (err) => {
-        console.log('HTTP Error', err);
-        this.showError('Error loading gps: ' + err.message);
-      }
-    );
+    this.subscription = interval(10000)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.gpsService.getAllGps())
+      )
+      .subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.gps = res.data;
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error loading gps: ' + err.message);
+        }
+      );
   }
 
   deleteGps(id: number): void {

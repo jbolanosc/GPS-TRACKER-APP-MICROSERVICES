@@ -80,7 +80,7 @@ export class OwnerFormComponent implements OnInit {
       );
     }
 
-    this.router.navigate(['gps']);
+    this.router.navigate(['owner']);
   }
 
   private showSuccess(message: string) {

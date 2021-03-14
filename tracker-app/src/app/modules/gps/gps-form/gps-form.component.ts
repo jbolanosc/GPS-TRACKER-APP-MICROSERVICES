@@ -26,18 +26,7 @@ export class GpsFormComponent implements OnInit {
     owner: null,
     status: null,
   };
-  owners = [
-    {
-      id: 1,
-      firstname: 'Josue',
-      lastname: 'Bolaños',
-    },
-    {
-      id: 2,
-      firstname: 'David',
-      lastname: 'Bolaños',
-    },
-  ];
+  owners = [];
   selectedOwner: string;
 
   constructor(

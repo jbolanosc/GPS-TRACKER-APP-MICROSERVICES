@@ -6,14 +6,15 @@ import {
   updateGps,
   deleteGps,
 } from "../Controllers/GpsController";
+import { readLimiter, limiter } from "../Services";
 
 const gpsRouter: Router = express.Router();
 
 gpsRouter
-  .get("/", getAllGps)
-  .post("/", createGps)
-  .get("/:id", getGps)
-  .put("/:id", updateGps)
-  .delete("/:id", deleteGps);
+  .get("/", readLimiter, getAllGps)
+  .post("/", limiter, createGps)
+  .get("/:id", limiter, getGps)
+  .put("/:id", limiter, updateGps)
+  .delete("/:id", limiter, deleteGps);
 
 export default gpsRouter;

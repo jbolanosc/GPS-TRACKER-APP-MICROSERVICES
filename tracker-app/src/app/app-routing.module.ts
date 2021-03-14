@@ -32,7 +32,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'landing' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

@@ -1,27 +1,19 @@
 import { OwnerService } from './../../../services/owner-service/owner.service';
 import { Owner } from './../../../models/Owner';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
+import { interval, Subscription } from 'rxjs';
+import { switchMap, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-owner-table',
   templateUrl: './owner-table.component.html',
   styleUrls: ['./owner-table.component.scss'],
 })
-export class OwnerTableComponent implements OnInit {
-  owners: Owner[] = [
-    {
-      id: 2,
-      firstname: 'jOSUE',
-      lastname: 'Bolaños',
-      email: 'josue.carit@gmail.com',
-      address: '133 fruo south',
-      country: 'Costa RIca',
-      phone: '1244',
-    },
-  ];
-
+export class OwnerTableComponent implements OnInit, OnDestroy {
+  owners: Owner[] = [];
+  subscription: Subscription;
   first: number = 0;
 
   rows: number = 10;
@@ -36,18 +28,26 @@ export class OwnerTableComponent implements OnInit {
     this.loadOwners();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   private loadOwners() {
-    this.ownerService.getAllOwners().subscribe(
-      (res) => {
-        console.log('HTTP response', res);
-        this.owners = res.data;
-        this.showSuccess('Owners loaded');
-      },
-      (err) => {
-        console.log('HTTP Error', err);
-        this.showError('Error loading owners: ' + err.message);
-      }
-    );
+    this.subscription = interval(5000)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.ownerService.getAllOwners())
+      )
+      .subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.owners = res.data;
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error loading owners: ' + err.message);
+        }
+      );
   }
 
   deleteOwner(id: number): void {

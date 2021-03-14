@@ -1,12 +1,17 @@
 import { TestBed } from '@angular/core/testing';
-
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { OwnerService } from './owner.service';
 
 describe('OwnerService', () => {
   let service: OwnerService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(OwnerService);
   });
 

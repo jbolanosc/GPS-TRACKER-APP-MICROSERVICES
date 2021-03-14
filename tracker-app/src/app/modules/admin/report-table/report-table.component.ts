@@ -1,16 +1,19 @@
 import { ReportService } from './../../../services/report-service/report-service.service';
 import { Report } from './../../../models/Report';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
+import { interval, Subscription } from 'rxjs';
+import { switchMap, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-report-table',
   templateUrl: './report-table.component.html',
   styleUrls: ['./report-table.component.scss'],
 })
-export class ReportTableComponent implements OnInit {
+export class ReportTableComponent implements OnInit, OnDestroy {
   reports: Report[] = [];
+  subscription: Subscription;
 
   first: number = 0;
 
@@ -26,18 +29,26 @@ export class ReportTableComponent implements OnInit {
     this.loadReports();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   private loadReports() {
-    this.reportService.getReports().subscribe(
-      (res) => {
-        console.log('HTTP response', res);
-        this.reports = res.data;
-        this.showSuccess('Reports loaded');
-      },
-      (err) => {
-        console.log('HTTP Error', err);
-        this.showError('Error loading reports: ' + err.message);
-      }
-    );
+    this.subscription = interval(5000)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.reportService.getReports())
+      )
+      .subscribe(
+        (res) => {
+          console.log('HTTP response', res);
+          this.reports = res.data;
+        },
+        (err) => {
+          console.log('HTTP Error', err);
+          this.showError('Error loading reports: ' + err.message);
+        }
+      );
   }
 
   deleteReport(id: number): void {

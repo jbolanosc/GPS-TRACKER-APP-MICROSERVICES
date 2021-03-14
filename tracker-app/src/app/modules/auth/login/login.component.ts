@@ -3,6 +3,7 @@ import { AuthService } from './../../../services/auth-service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -30,10 +31,11 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         console.log('HTTP response', res);
         localStorage.setItem('access_token', res.data);
-        this.showSuccess('Welcome');
+        var decoded: any = jwt_decode(res.data);
+        console.error('decorde', decoded);
+        this.showSuccess('Welcome ' + decoded.email);
       },
       (err: any) => {
-        console.log('HTTP Error', err);
         this.showError(err.message);
       }
     );

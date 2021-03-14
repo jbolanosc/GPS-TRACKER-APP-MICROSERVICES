@@ -31,28 +31,8 @@ export class ReportFormComponent implements OnInit {
     status: null,
   };
 
-  allGps = [
-    {
-      id: 1,
-      name: 'C3PO',
-    },
-    {
-      id: 2,
-      name: 'R2D2',
-    },
-  ];
-  owners = [
-    {
-      id: 1,
-      firstname: 'JOSUE',
-      lastname: 'Bolaños',
-    },
-    {
-      id: 2,
-      firstname: 'JOSUE',
-      lastname: 'cartit',
-    },
-  ];
+  allGps = [];
+  owners = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -99,7 +79,7 @@ export class ReportFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating report: ' + err);
+          this.showError('Error updating report: ' + err.message);
         }
       );
     } else {
@@ -110,7 +90,7 @@ export class ReportFormComponent implements OnInit {
         },
         (err) => {
           console.log('HTTP Error', err);
-          this.showError('Error updating report: ' + err);
+          this.showError('Error updating report: ' + err.message);
         }
       );
     }
@@ -163,9 +143,7 @@ export class ReportFormComponent implements OnInit {
 
   public saveOwner(e): void {
     let id = e.target.value;
-    console.log(id);
     let list = this.owners.filter((x) => x.id == id)[0];
     list ? (this.report.owner = parseInt(id)) : this.showError('INVALID GPS');
-    console.log(this.report);
   }
 }
