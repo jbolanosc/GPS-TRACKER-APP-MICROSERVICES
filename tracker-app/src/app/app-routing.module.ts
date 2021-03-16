@@ -30,6 +30,11 @@ const routes: Routes = [
         path: 'auth',
         loadChildren: './modules/auth/auth.module#AuthModule',
       },
+      {
+        path: 'user',
+        loadChildren: './modules/user/user.module#UserModule',
+        canActivate: [AuthGuard],
+      },
     ],
   },
   { path: '**', redirectTo: '' },

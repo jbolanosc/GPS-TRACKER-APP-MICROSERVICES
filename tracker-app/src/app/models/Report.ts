@@ -5,4 +5,6 @@ export class Report {
   gps: number;
   owner: number;
   status: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

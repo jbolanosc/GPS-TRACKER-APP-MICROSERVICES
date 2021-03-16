@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
     role: '',
+    createdAt: null,
+    updatedAt: null,
   };
 
   constructor(
@@ -47,6 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   showError(message: string) {
-    this.toastr.error('Invalid user or password', message);
+    this.toastr.error('Action Failed', message);
   }
 }

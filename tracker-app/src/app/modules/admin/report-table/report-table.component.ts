@@ -70,11 +70,11 @@ export class ReportTableComponent implements OnInit, OnDestroy {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success(message, 'Action Success');
+    this.toastr.success('Action Success', message);
   }
 
   private showError(message: string) {
-    this.toastr.error(message, 'Action failed');
+    this.toastr.error('Action Failed', message);
   }
 
   next() {

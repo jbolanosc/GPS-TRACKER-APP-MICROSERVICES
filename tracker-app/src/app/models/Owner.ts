@@ -1,4 +1,4 @@
-export interface Owner {
+export class Owner {
   id: number;
   firstname: string;
   lastname: string;
@@ -6,4 +6,6 @@ export interface Owner {
   address: string;
   country: string;
   phone: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

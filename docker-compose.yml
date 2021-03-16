@@ -10,6 +10,8 @@ services:
       - "7001:1433"
     networks:
       gps-network:
+    volumes:
+      - gps-volume:/var/opt/mssql
 
   gps-api:
     build: "./gpsAPI"
@@ -36,6 +38,8 @@ services:
       - "7002:1433"
     networks:
       user-network:
+    volumes:
+      - user-volume:/var/opt/mssql
 
   user-api:
     build: "./user-api"
@@ -62,6 +66,8 @@ services:
       - "7003:1433"
     networks:
       report-network:
+    volumes:
+      - report-volume:/var/opt/mssql
 
   report-api:
     build: "./report-api"
@@ -88,6 +94,8 @@ services:
       - "7004:1433"
     networks:
       owner-network:
+    volumes:
+      - owner-volume:/var/opt/mssql
 
   owner-api:
     build: "./owner-api"
@@ -135,6 +143,12 @@ services:
       - "7105:80"
     networks:
       public-network:
+
+volumes:
+  gps-volume:
+  user-volume:
+  report-volume:
+  owner-volume:
 
 networks:
   gps-network:

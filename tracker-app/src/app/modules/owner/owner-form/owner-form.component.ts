@@ -14,13 +14,15 @@ export class OwnerFormComponent implements OnInit {
   private edit: boolean = false;
   private param: number = 0;
   owner: Owner = {
-    id: 0,
+    id: null,
     firstname: null,
     lastname: null,
     email: null,
     address: null,
     country: null,
     phone: null,
+    createdAt: null,
+    updatedAt: null,
   };
 
   constructor(
@@ -84,10 +86,10 @@ export class OwnerFormComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success(message, 'Action Success');
+    this.toastr.success('Action Success', message);
   }
 
   private showError(message: string) {
-    this.toastr.error(message, 'Action failed');
+    this.toastr.error('Action Failed', message);
   }
 }

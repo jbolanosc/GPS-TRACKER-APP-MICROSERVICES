@@ -35,8 +35,6 @@ export class GpsService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(gps);
-    console.log(JSON.stringify(gps));
     return this.http.post<any>(`${environment.GPS_API}`, gps, {
       headers: headers,
     });
@@ -47,8 +45,6 @@ export class GpsService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(gps);
-    console.log(JSON.stringify(gps));
     return this.http.put<any>(`${environment.GPS_API}/${id}`, gps, {
       headers: headers,
     });

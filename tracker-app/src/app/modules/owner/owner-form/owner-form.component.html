@@ -12,7 +12,8 @@
         name="firstname"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
-        minlength="3"
+        minlength="1"
+        maxlength="40"
         [(ngModel)]="owner.firstname"
         #firstname="ngModel"
       />
@@ -30,7 +31,8 @@
         name="lastname"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
-        minlength="3"
+        minlength="1"
+        maxlength="30"
         [(ngModel)]="owner.lastname"
         #lastname="ngModel"
       />
@@ -48,7 +50,8 @@
         name="email"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
-        minlength="6"
+        minlength="5"
+        maxlength="25"
         [(ngModel)]="owner.email"
         #email="ngModel"
       />
@@ -67,6 +70,7 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
         minlength="6"
+        maxlength="40"
         [(ngModel)]="owner.address"
         #address="ngModel"
       />
@@ -85,6 +89,7 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
         minlength="3"
+        maxlength="20"
         [(ngModel)]="owner.country"
         #country="ngModel"
       />
@@ -103,6 +108,7 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
         minlength="3"
+        maxlength="20"
         [(ngModel)]="owner.phone"
         #phone="ngModel"
       />
@@ -112,6 +118,14 @@
       >
         Invalid phone
       </div>
+    </div>
+    <div *ngIf="owner.id">
+      <label class="block mb-2 text-primary"
+        >CREATED AT: {{ owner.createdAt | date: "full" }}</label
+      >
+      <label class="block mb-2 text-primary"
+        >UPDATED AT: {{ owner.updatedAt | date: "full" }}</label
+      >
     </div>
     <div>
       <input

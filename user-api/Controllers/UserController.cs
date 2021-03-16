@@ -80,7 +80,7 @@ namespace user_api.Controllers
                 _context.Entry(user).State = EntityState.Modified;
                 _context.SaveChanges();
 
-                return Ok("User Updated");
+                return Ok();
             }
             return NotFound();
 

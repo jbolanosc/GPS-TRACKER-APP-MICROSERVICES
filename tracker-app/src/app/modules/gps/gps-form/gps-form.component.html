@@ -11,6 +11,7 @@
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
         minlength="4"
+        maxlength="50"
         [(ngModel)]="gps.name"
         #name="ngModel"
       />
@@ -28,6 +29,7 @@
         name="latitude"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
+        maxlength="10"
         type="number"
         step="0.01"
         [(ngModel)]="gps.latitude"
@@ -47,6 +49,7 @@
         name="longitude"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
+        maxlength="10"
         type="number"
         step="0.01"
         [(ngModel)]="gps.longitude"
@@ -70,6 +73,7 @@
         [(ngModel)]="gps.owner"
         #owner="ngModel"
         (change)="saveOwner($event)"
+        autocomplete="off"
       />
       <datalist id="owners">
         <option
@@ -106,6 +110,14 @@
       >
         Invalid Status
       </div>
+    </div>
+    <div *ngIf="gps.id">
+      <label class="block mb-2 text-primary"
+        >CREATED AT: {{ gps.createdAt | date: "full" }}</label
+      >
+      <label class="block mb-2 text-primary"
+        >UPDATED AT: {{ gps.updatedAt | date: "full" }}</label
+      >
     </div>
     <div>
       <input

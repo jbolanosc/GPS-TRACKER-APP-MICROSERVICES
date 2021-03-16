@@ -34,6 +34,7 @@
         name="description"
         class="w-full p-2 mb-2 text-primary border-b-2 border-primary outline-none focus:bg-gray-300"
         required
+        maxlength="25"
         [(ngModel)]="report.description"
         #description="ngModel"
       />
@@ -57,6 +58,7 @@
         [(ngModel)]="report.gps"
         #gps="ngModel"
         (change)="saveGps($event)"
+        autocomplete="off"
       />
       <datalist id="allGps">
         <option
@@ -82,6 +84,7 @@
         [(ngModel)]="report.owner"
         #owner="ngModel"
         (change)="saveOwner($event)"
+        autocomplete="off"
       />
       <datalist id="owners" maxlength="2">
         <option
@@ -124,6 +127,14 @@
       >
         Invalid status
       </div>
+    </div>
+    <div *ngIf="report.id">
+      <label class="block mb-2 text-primary"
+        >CREATED AT: {{ report.createdAt | date: "full" }}</label
+      >
+      <label class="block mb-2 text-primary"
+        >UPDATED AT: {{ report.updatedAt | date: "full" }}</label
+      >
     </div>
     <div>
       <input

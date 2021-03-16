@@ -19,12 +19,14 @@ export class GpsFormComponent implements OnInit {
     { id: 2, label: 'Inactive' },
   ];
   gps: Gps = {
-    id: 0,
+    id: null,
     name: null,
     latitude: null,
     longitude: null,
     owner: null,
     status: null,
+    createdAt: null,
+    updatedAt: null,
   };
   owners = [];
   selectedOwner: string;
@@ -106,11 +108,11 @@ export class GpsFormComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success(message, 'Action Success');
+    this.toastr.success('Action Success', message);
   }
 
   private showError(message: string) {
-    this.toastr.error(message, 'Action failed');
+    this.toastr.error('Action Failed', message);
   }
 
   public saveOwner(e): void {

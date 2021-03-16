@@ -9,7 +9,7 @@ export const getToken = (user: any) => {
       role: user.role,
     },
     process.env.JWT_SECRET || "",
-    { expiresIn: "1d" }
+    { expiresIn: "1d", issuer: "http://api-gateway" }
   );
 };
 
@@ -23,12 +23,20 @@ export const validateToken = (
   if (authorization) {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(token, process.env.JWT_SECRET || "", (err, decode) => {
-      if (err)
-        return res.status(401).send({ msg: "invalid Token From AUTH " + err });
+      if (err) return res.status(401).send({ msg: "invalid Token: " + err });
       req.user = decode;
       return next();
     });
   } else {
     return res.status(401).send({ msg: "No token found" });
   }
+};
+
+export const validateAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(req.user);
+  return next();
 };

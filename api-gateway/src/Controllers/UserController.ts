@@ -71,6 +71,7 @@ export const updateUser = async (req: Request, res: Response) => {
     }
     return res.json(errorResponse(Constants.BAD_REQUEST)).status(400);
   } catch (e) {
+    console.log(e);
     return res
       .status(500)
       .send(errorResponse(Constants.FAILED_UPDATE + e.toString()));
