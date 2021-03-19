@@ -76,6 +76,7 @@ namespace user_api.Controllers
             }
             if (ModelState.IsValid)
             {
+                user.password = BC.HashPassword(user.password);
                 user.updatedAt = DateTime.Now;
                 _context.Entry(user).State = EntityState.Modified;
                 _context.SaveChanges();
