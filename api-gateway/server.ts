@@ -9,7 +9,12 @@ import router from "./src/Routes";
 const app: Application = express();
 const port: unknown = process.env.PORT || 5000;
 
-var whitelist = ["http://tracker-app:80", "http://localhost:7105"];
+var whitelist = [
+  "http://tracker-app:80",
+  "http://localhost:7105",
+  "http://localhost:7105/api/gps",
+  "http://localhost:80",
+];
 
 var corsOptions = {
   origin: function (origin: any, callback: any) {
@@ -21,13 +26,13 @@ var corsOptions = {
   },
 };
 //Middlewares
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
 //Routes
-app.use(router);
+app.use("/api/", router);
 
 app.listen(port, () => {
   console.log("Listening on port", port);

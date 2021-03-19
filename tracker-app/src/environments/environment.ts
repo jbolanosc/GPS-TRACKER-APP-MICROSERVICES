@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  GPS_API: 'http://localhost:7100/gps',
-  USER_API: 'http://localhost:7100/user',
-  REPORT_API: 'http://localhost:7100/reports',
-  OWNER_API: 'http://localhost:7100/owners',
+  host: window.location.hostname,
+  GPS_API: '/api/gps',
+  USER_API: '/api/user',
+  REPORT_API: '/api/reports',
+  OWNER_API: '/api/owners',
 };
 
 /*

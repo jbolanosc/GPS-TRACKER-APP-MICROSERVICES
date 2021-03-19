@@ -11,7 +11,7 @@ router.get("/ping", (req: Request, res: Response) => {
   return res.json("Pong...");
 });
 
-router.use("/gps", validateToken, validateAdmin, gpsRouter);
+router.use("/gps", validateToken, gpsRouter);
 router.use("/user", userRouter);
 router.use("/reports", validateToken, reportRouter);
 router.use("/owners", validateToken, ownerRouter);

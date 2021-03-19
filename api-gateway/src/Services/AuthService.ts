@@ -37,9 +37,9 @@ export const validateAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.user);
+  console.log(req.user.role);
 
-  if (req.user.role === "Admin") {
+  if (req.user.role === "ADMIN") {
     return next();
   }
   return res.status(401).send({ msg: "Only admins allowed" });

@@ -27,8 +27,8 @@ namespace user_api.Models
             {
                 System.Console.WriteLine("Seeding..");
                 context.UserItems.AddRange(
-                    new User() { email = "josue.carit@gmail.com", password = BC.HashPassword("nana"), role = "admin", createdAt = DateTime.Now, updatedAt = DateTime.Now },
-                    new User() { email = "dbolanos@gmail.com", password = BC.HashPassword("nana1"), role = "checker", createdAt = DateTime.Now, updatedAt = DateTime.Now }
+                    new User() { email = "josue.carit@gmail.com", password = BC.HashPassword("nana"), role = "ADMIN", createdAt = DateTime.Now, updatedAt = DateTime.Now },
+                    new User() { email = "dbolanos@gmail.com", password = BC.HashPassword("nana1"), role = "ADMIN", createdAt = DateTime.Now, updatedAt = DateTime.Now }
                 );
                 context.SaveChanges();
             }

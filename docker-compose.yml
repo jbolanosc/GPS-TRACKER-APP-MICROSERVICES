@@ -15,6 +15,7 @@ services:
 
   gps-api:
     build: "./gpsAPI"
+    image: jbolanosc/gps-api
     restart: "always"
     environment:
       DBUser: "SA"
@@ -43,6 +44,7 @@ services:
 
   user-api:
     build: "./user-api"
+    image: jbolanosc/user-api
     restart: "always"
     environment:
       DBUser: "SA"
