@@ -14,7 +14,7 @@ export class OwnerFormComponent implements OnInit {
   private edit: boolean = false;
   private param: number = 0;
   owner: Owner = {
-    id: null,
+    id: 0,
     firstname: null,
     lastname: null,
     email: null,
@@ -86,10 +86,10 @@ export class OwnerFormComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action Failed', message);
+    this.toastr.error(message, 'Action Failed');
   }
 }

@@ -39,8 +39,6 @@ export const createGps = async (req: Request, res: Response) => {
   try {
     if (req.body.owner !== null) {
       let result = await validateOwner(req.body.owner);
-      console.log("result");
-      console.log(result);
       if (result === false) {
         return res.status(400).send(errorResponse("Invalid Owner" + result));
       }
@@ -68,8 +66,6 @@ export const updateGps = async (req: Request, res: Response) => {
     if (req.params.id) {
       if (req.body.owner !== null) {
         let result = await validateOwner(req.body.owner);
-        console.log("object");
-        console.log(result);
         if (result === false) {
           return res.status(400).send(errorResponse("Invalid Owner"));
         }
@@ -121,9 +117,6 @@ export const validateGps = async (id: number) => {
   const gps = await fetch(`${gpsProxy}/api/gps/${id}`)
     .then(checkStatus)
     .then((res: any) => res.json());
-
-  console.log("gps");
-  console.log(gps);
   if (gps) return true;
 
   return false;

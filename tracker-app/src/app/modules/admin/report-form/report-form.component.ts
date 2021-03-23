@@ -23,7 +23,7 @@ export class ReportFormComponent implements OnInit {
     { id: 2, label: 'RESOLVED' },
   ];
   report: Report = {
-    id: null,
+    id: 0,
     type: null,
     description: null,
     gps: null,
@@ -100,11 +100,11 @@ export class ReportFormComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action Failed', message);
+    this.toastr.error(message, 'Action Failed');
   }
 
   private loadGps() {

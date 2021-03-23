@@ -37,8 +37,6 @@ export const validateAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.user.role);
-
   if (req.user.role === "ADMIN") {
     return next();
   }

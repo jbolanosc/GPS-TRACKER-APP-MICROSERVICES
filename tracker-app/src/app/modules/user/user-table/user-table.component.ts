@@ -67,11 +67,11 @@ export class UserTableComponent implements OnInit, OnDestroy {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action failed', message);
+    this.toastr.error(message, 'Action Success');
   }
 
   next() {

@@ -130,10 +130,12 @@
     </div>
     <div *ngIf="report.id">
       <label class="block mb-2 text-primary"
-        >CREATED AT: {{ report.createdAt | date: "full" }}</label
+        ><strong>CREATED AT:</strong>
+        {{ report.createdAt | date: "full" }}</label
       >
       <label class="block mb-2 text-primary"
-        >UPDATED AT: {{ report.updatedAt | date: "full" }}</label
+        ><strong>UPDATED AT: </strong
+        >{{ report.updatedAt | date: "full" }}</label
       >
     </div>
     <div>

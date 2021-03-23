@@ -103,9 +103,6 @@ export const validateOwner = async (id: number) => {
   const owner = await fetch(`${ownerProxy}/api/owner/${id}`)
     .then(checkStatus)
     .then((res: any) => res.json());
-
-  console.log("owner");
-  console.log(owner);
   if (owner) return true;
 
   return false;

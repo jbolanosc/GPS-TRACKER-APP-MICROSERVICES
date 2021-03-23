@@ -19,7 +19,7 @@ export class GpsFormComponent implements OnInit {
     { id: 2, label: 'Inactive' },
   ];
   gps: Gps = {
-    id: null,
+    id: 0,
     name: null,
     latitude: null,
     longitude: null,
@@ -108,11 +108,11 @@ export class GpsFormComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action Failed', message);
+    this.toastr.error(message, 'Action Failed');
   }
 
   public saveOwner(e): void {

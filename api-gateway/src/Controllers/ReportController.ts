@@ -41,7 +41,6 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const createReport = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     if (req.body.owner !== null && req.body.gps !== null) {
       if ((await validateGps(req.body.gps)) === false)
         return res.status(400).send(errorResponse("Invalid gps"));
@@ -71,7 +70,6 @@ export const createReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   try {
     if (req.params.id) {
-      console.log(req.body);
       if (req.body.owner !== null && req.body.gps !== null) {
         if ((await validateGps(req.body.gps)) === false)
           return res.status(400).send(errorResponse("Invalid gps"));

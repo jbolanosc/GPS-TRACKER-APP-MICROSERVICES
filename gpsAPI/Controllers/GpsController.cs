@@ -43,18 +43,20 @@ namespace gpsAPI.Controllers
         [HttpPost]
         public ActionResult<Gps> PostGpsItem(Gps gps)
         {
+            System.Console.WriteLine(gps);
             if (ModelState.IsValid)
             {
                 System.Console.WriteLine(gps);
 
                 gps.createdAt = DateTime.Now;
+                gps.updatedAt = DateTime.Now;
 
                 _context.GpsItems.Add(gps);
                 _context.SaveChanges();
 
                 return CreatedAtAction("GetGpsItem", new Gps { id = gps.id }, gps);
             }
-            return BadRequest("INVALID BODY");
+            return BadRequest();
 
         }
 

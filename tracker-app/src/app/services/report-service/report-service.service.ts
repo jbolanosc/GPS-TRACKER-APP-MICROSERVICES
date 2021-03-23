@@ -35,8 +35,6 @@ export class ReportService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(report);
-    console.log(JSON.stringify(report));
     return this.http.post<any>(`${environment.REPORT_API}`, report, {
       headers: headers,
     });
@@ -47,8 +45,6 @@ export class ReportService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(report);
-    console.log(JSON.stringify(report));
     return this.http.put<any>(`${environment.REPORT_API}/${id}`, report, {
       headers: headers,
     });

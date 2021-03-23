@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
 
   showSuccess(message: string) {
     this.router.navigate(['gps']);
-    this.toastr.success('Welcome', message);
+    this.toastr.success(message, 'Welcome');
   }
 
   showError(message: string) {
-    this.toastr.error('Action Failed', message);
+    this.toastr.error(message, 'Action Failed');
   }
 }

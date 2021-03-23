@@ -67,11 +67,11 @@ export class GpsTableComponent implements OnInit, OnDestroy {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action Failed', message);
+    this.toastr.error(message, 'Action Failed');
   }
 
   next() {

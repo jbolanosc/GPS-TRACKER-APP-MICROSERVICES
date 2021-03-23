@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     { id: 2, label: 'User' },
   ];
   user: User = {
-    id: null,
+    id: 0,
     email: null,
     password: null,
     role: null,
@@ -87,10 +87,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   private showSuccess(message: string) {
-    this.toastr.success('Action Success', message);
+    this.toastr.success(message, 'Action Success');
   }
 
   private showError(message: string) {
-    this.toastr.error('Action failed', message);
+    this.toastr.error(message, 'Action failed');
   }
 }

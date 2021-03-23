@@ -35,8 +35,6 @@ export class OwnerService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(owner);
-    console.log(JSON.stringify(owner));
     return this.http.post<any>(`${environment.OWNER_API}`, owner, {
       headers: headers,
     });
@@ -47,8 +45,6 @@ export class OwnerService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.tokenGetter()}`,
     });
-    console.log(owner);
-    console.log(JSON.stringify(owner));
     return this.http.put<any>(`${environment.OWNER_API}/${id}`, owner, {
       headers: headers,
     });
